@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6563be9b3ed010048b85ae99adf11d6b, type: 3}
+  m_Name: WaterShaman
+  m_EditorClassIdentifier: 
+  characterName: 0
+  jumpCount: 2
+  acceleration: 140
+  maxSpeed: 8.5
+  jumpForce: 70
+  basicAnimations:
+  - {fileID: 11400000, guid: cbc83652ffcbfc448a7426331244f785, type: 2}
+  - {fileID: 11400000, guid: 1a40d3bf80f43d440894a5f70ab8c577, type: 2}
+  - {fileID: 11400000, guid: c768264b04112074f845407593263225, type: 2}
+  moveList:
+  - moveName: Light Punch
+    moveAnim: {fileID: 11400000, guid: 4829a87c95d307b48ab45eee76084631, type: 2}
+    inputSequence:
+    - keys: 04000000
+      frameWindow: 0
+  - moveName: Heavy Punch
+    moveAnim: {fileID: 11400000, guid: 888ed32d452d4f046b2fc5459f7431c8, type: 2}
+    inputSequence:
+    - keys: 01000000
+      frameWindow: 0
+  - moveName: Light Kick
+    moveAnim: {fileID: 11400000, guid: be85d7644db77014e82fa2e49ce24b27, type: 2}
+    inputSequence:
+    - keys: 02000000
+      frameWindow: 0.16
+  - moveName: Heavy Kick
+    moveAnim: {fileID: 11400000, guid: c12cec574f7766841abd963ed50d7874, type: 2}
+    inputSequence:
+    - keys: 03000000
+      frameWindow: 0.16
+  - moveName: Water Elemental's Wrath
+    moveAnim: {fileID: 11400000, guid: 255caad681633094ab787a843855ee98, type: 2}
+    inputSequence:
+    - keys: 03000000
+      frameWindow: 0.16
+    - keys: 02000000
+      frameWindow: 0.16
+  - moveName: Water Elemental's Retribution
+    moveAnim: {fileID: 11400000, guid: dbcae52be5097344285bab56ce10437b, type: 2}
+    inputSequence:
+    - keys: 03000000
+      frameWindow: 0.16
+    - keys: 02000000
+      frameWindow: 0.16
+    - keys: 01000000
+      frameWindow: 0
+  - moveName: Tidal Wave
+    moveAnim: {fileID: 11400000, guid: 74396051cd5e00648afdcfc7f23e0da1, type: 2}
+    inputSequence:
+    - keys: 0c00000002000000
+      frameWindow: 0
+  - moveName: Tidal Kick
+    moveAnim: {fileID: 11400000, guid: 0377b0504a1ba8447a194d729a966ae1, type: 2}
+    inputSequence:
+    - keys: 02000000
+      frameWindow: 1
+    - keys: 02000000
+      frameWindow: 0
