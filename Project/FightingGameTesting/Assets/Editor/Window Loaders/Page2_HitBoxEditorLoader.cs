@@ -225,6 +225,15 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         GUILayout.EndHorizontal();
         //row 2
 
+        // Row 3
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Remove Resize Key Frame"))
+        {
+            item = HitBoxEditorManager.instance.RemoveSizeChangeFrame(item);
+        }
+        GUILayout.EndHorizontal();
+        //row 3
+
         HitBoxEditorManager.instance.hitBoxData[index] = item;
 
         EditorGUILayout.EndVertical(); //end of inner box

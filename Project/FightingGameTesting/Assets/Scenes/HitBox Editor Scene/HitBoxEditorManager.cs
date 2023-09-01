@@ -323,6 +323,52 @@ public class HitBoxEditorManager : MonoBehaviour
         return hitBoxData;
     }
 
+    public HitBoxData RemoveSizeChangeFrame(HitBoxData hitBoxData)
+    {
+        int frame = currentFrame + 1;
+
+        int frameIndex;
+
+        do
+        {
+            frameIndex = Array.IndexOf(hitBoxData.sizeChangeFrames, --frame);
+        } while (frameIndex == -1 && frame > 0);
+
+        Debug.Log("frame index of current frame: " + frameIndex);
+        if (frameIndex != -1)
+        {
+            //append frame list
+            int[] newSizeChangeFrames = new int[hitBoxData.sizeChangeFrames.Length - 1];
+            for (int i = 0; i < hitBoxData.sizeChangeFrames.Length; i++)
+            {
+                if (i < frameIndex)
+                    newSizeChangeFrames[i] = hitBoxData.sizeChangeFrames[i];
+                else if(i > frameIndex)
+                    newSizeChangeFrames[i - 1] = hitBoxData.sizeChangeFrames[i];
+            }
+
+            hitBoxData.sizeChangeFrames = newSizeChangeFrames;
+
+            //append data list
+            (Vector2 Center, Vector2 Size)[] newSizeChangeFrameData = new (Vector2 Center, Vector2 Size)[hitBoxData.sizeChangeFrameData.Length - 1];
+            for (int i = 0; i < hitBoxData.sizeChangeFrameData.Length; i++)
+            {
+                if (i < frameIndex)
+                    newSizeChangeFrameData[i] = hitBoxData.sizeChangeFrameData[i];
+                else if (i > frameIndex)
+                    newSizeChangeFrameData[i - 1] = hitBoxData.sizeChangeFrameData[i];
+            }
+
+            hitBoxData.sizeChangeFrameData = newSizeChangeFrameData;
+        }
+        else
+        {
+            Debug.Log("No Key Frame Exists On This Frame");
+        }
+
+        return hitBoxData;
+    }
+
     public void ResetCamera()
     {
         cam.transform.position = defaultCameraPosition;
