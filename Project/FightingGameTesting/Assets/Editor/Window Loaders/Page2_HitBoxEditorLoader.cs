@@ -200,9 +200,9 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         // Row 2
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Start frame: ", GUILayout.Width(80)); // Adjust the width as necessary
-        item.startFrame = EditorGUILayout.IntField(item.startFrame, GUILayout.Width(50)); // Adjust the width as necessary
+        item = HitBoxEditorManager.instance.ChangeStartFrame(item, EditorGUILayout.IntField(item.startFrame, GUILayout.Width(50))); // Adjust the width as necessary
         EditorGUILayout.LabelField("End frame: ", GUILayout.Width(80)); // Adjust the width as necessary
-        item.endFrame = EditorGUILayout.IntField(item.endFrame, GUILayout.Width(50)); // Adjust the width as necessary
+        item = HitBoxEditorManager.instance.ChangeEndFrame(item, EditorGUILayout.IntField(item.endFrame, GUILayout.Width(50))); // Adjust the width as necessary
         GUILayout.EndHorizontal();
         //row 2
 

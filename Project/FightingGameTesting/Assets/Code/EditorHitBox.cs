@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class EditorHitBox : MonoBehaviour
 {
-
-    public bool isSelected = false;
     public int index;
 
+    public bool isSelected = false;
+    public bool isEnabled = true;
+
     private bool handlesVisible = false;
+
+    private BoxCollider collider;
 
     private GameObject handle1;
     private GameObject handle2;
@@ -23,7 +26,9 @@ public class EditorHitBox : MonoBehaviour
     {
         previousPosition = transform.position;
 
+        collider = GetComponent<BoxCollider>();
         transform.GetComponent<MeshRenderer>().enabled = false;
+
         InitializeHandles();
     }
 
@@ -31,6 +36,8 @@ public class EditorHitBox : MonoBehaviour
     void Update()
     {
         ShowHandles();
+
+        UpdateEnabled();
         GetPositionInFrame();
         UpdateHandlePositions();
     }
@@ -42,55 +49,83 @@ public class EditorHitBox : MonoBehaviour
 
     void DrawHitboxGizmos()
     {
-        // Calculate the midpoint between two handles
-        Vector3 midpoint = (handle1.transform.position + handle2.transform.position) / 2;
+        if(isEnabled)
+        {
+            // Calculate the midpoint between two handles
+            Vector3 midpoint = (handle1.transform.position + handle2.transform.position) / 2;
 
-        // Calculate the dimensions of the box based on the handle positions
-        Vector3 size = new Vector3(
-            Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x),
-            Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y),
-            Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z)
-        );
+            // Calculate the dimensions of the box based on the handle positions
+            Vector3 size = new Vector3(
+                Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x),
+                Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y),
+                Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z)
+            );
 
-        // Set gizmo color
-        if(HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
-            Gizmos.color = new Color(1, 0, 0, 0.5f);
-        else
-            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            // Set gizmo color
+            if (HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
+                Gizmos.color = new Color(1, 0, 0, 0.5f);
+            else
+                Gizmos.color = new Color(0, 1, 0, 0.5f);
 
-        // Draw the wireframe cube
-        Gizmos.DrawWireCube(midpoint, new Vector3(size.x, size.y, size.z));
+            // Draw the wireframe cube
+            Gizmos.DrawWireCube(midpoint, new Vector3(size.x, size.y, size.z));
 
-        // Draw the solid cube
-        Gizmos.DrawCube(midpoint, new Vector3(size.x, size.y, size.z));
+            // Draw the solid cube
+            Gizmos.DrawCube(midpoint, new Vector3(size.x, size.y, size.z));
+        }
     }
+
+
     private bool isDragging = false;
     private Vector3 lastMousePosition;
 
     public float dragSpeed = 1.0f;
     RaycastHit hit;
 
+    void UpdateEnabled()
+    {
+        if (HitBoxEditorManager.instance.currentFrame >= HitBoxEditorManager.instance.hitBoxData[index].startFrame && HitBoxEditorManager.instance.currentFrame < HitBoxEditorManager.instance.hitBoxData[index].endFrame)
+        {
+            if(!isEnabled)
+            {
+                Debug.Log("Enabling hitbox");
+                collider.enabled = true;
+                isEnabled = true;
+            }
+        }
+        else if(isEnabled)
+        {
+            Debug.Log("Disabling hitbox");
+            collider.enabled = false;
+            isEnabled = false;
+            isSelected = false;
+        }
+    }
+
     void GetPositionInFrame()
     {
-        int frame = HitBoxEditorManager.instance.currentFrame + 1;
-
-        int index;
-
-        do
+        if(gameObject.activeSelf)
         {
-            index = Array.IndexOf(HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrames, --frame);
-        } while (index == -1 && frame > 0);
+            int frame = HitBoxEditorManager.instance.currentFrame + 1;
 
-        if(index != -1)
-        {
-            center = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Center;
-            size = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Size;
+            int index;
 
-            transform.position = center;
-            transform.localScale = size;
+            do
+            {
+                index = Array.IndexOf(HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrames, --frame);
+            } while (index == -1 && frame > 0);
 
-            handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2, -transform.localScale.y / 2, 0);
-            handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2, transform.localScale.y / 2);
+            if (index != -1)
+            {
+                center = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Center;
+                size = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Size;
+
+                transform.position = center;
+                transform.localScale = size;
+
+                handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2, -transform.localScale.y / 2, 0);
+                handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2, transform.localScale.y / 2);
+            }
         }
     }
 

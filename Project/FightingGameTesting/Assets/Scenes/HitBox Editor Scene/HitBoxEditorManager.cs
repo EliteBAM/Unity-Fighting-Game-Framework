@@ -221,6 +221,8 @@ public class HitBoxEditorManager : MonoBehaviour
     public void AddHitBox()
     {
         HitBoxData newHitBoxData = new HitBoxData();
+        newHitBoxData.startFrame = 0;
+        newHitBoxData.endFrame = 1;
         newHitBoxData.sizeChangeFrames = new int[0];
         newHitBoxData.sizeChangeFrameData = new (Vector2, Vector2)[0];
 
@@ -273,6 +275,26 @@ public class HitBoxEditorManager : MonoBehaviour
         hitBoxData.boxType = type;
 
         Debug.Log("The hitbox type has been changed to: " + hitBoxData.boxType);
+
+        return hitBoxData;
+    }
+
+    public HitBoxData ChangeStartFrame(HitBoxData hitBoxData, int startFrame)
+    {
+        if(startFrame < hitBoxData.endFrame)
+            hitBoxData.startFrame = startFrame;
+
+        Debug.Log("The hitbox startFrane has been changed to: " + hitBoxData.startFrame);
+
+        return hitBoxData;
+    }
+
+    public HitBoxData ChangeEndFrame(HitBoxData hitBoxData, int endFrame)
+    {
+        if (endFrame > hitBoxData.startFrame)
+            hitBoxData.endFrame = endFrame;
+
+        Debug.Log("The hitbox startFrane has been changed to: " + hitBoxData.endFrame);
 
         return hitBoxData;
     }
