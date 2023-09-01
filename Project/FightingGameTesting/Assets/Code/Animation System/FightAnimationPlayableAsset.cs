@@ -9,8 +9,11 @@ public class FightAnimationPlayableAsset : PlayableAsset
 
     public AnimationClip clip;
 
-    //will probably be public in the future
-    private HitBoxPlayable hitBoxData;
+    public HitBoxData[] hitBoxData;
+    
+    //for use in hitbox editor only
+    //[HideInInspector]
+    public string[] hitBoxNames;
 
     public FightAnimationPlayableAsset(AnimationClip clip)
     {
@@ -23,13 +26,9 @@ public class FightAnimationPlayableAsset : PlayableAsset
         var playable = ScriptPlayable<FightAnimationPlayable>.Create(graph);
         var behaviour = playable.GetBehaviour();
 
-        behaviour.Initialize(playable, graph, clip);
+        behaviour.Initialize(playable, graph, clip, hitBoxData);
 
         return playable;
     }
 
 }
-
-//make a new scene that serves as a hitbox editor
-//create an editor script with a button on it that will call AssetDatabase.CreateAsset and create a playable file
-//have it save hitbox data based on the scene

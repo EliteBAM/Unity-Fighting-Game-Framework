@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour
     //GameObject Components
     [HideInInspector] public Rigidbody rb;
     Animator anim;
+    HitBoxAnimator hitBoxAnim;
 
     //special data structures
     public ComboTree comboTree;
@@ -34,6 +35,7 @@ public class CharacterController : MonoBehaviour
     {
 
         anim = GetComponentInChildren<Animator>();
+        hitBoxAnim = GetComponentInChildren<HitBoxAnimator>();
         rb = GetComponent<Rigidbody>();
 
         InitializeCharacterSettings();
@@ -103,7 +105,7 @@ public class CharacterController : MonoBehaviour
 
             comboTree = new ComboTree(characterData.moveList);
 
-            animationManager = new AnimationManager(anim, characterData);
+            animationManager = new AnimationManager(anim, hitBoxAnim, characterData);
 
             movementManager = new MovementManager(this, characterData);
 

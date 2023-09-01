@@ -78,8 +78,9 @@ public class HitBoxTesting : MonoBehaviour
         UpdateHitBoxSelection();
 
         DrawHitboxGizmos();
-
+#if UNITY_EDITOR
         DrawEdges();
+#endif
     }
 
     void CheckHit()
@@ -141,6 +142,7 @@ public class HitBoxTesting : MonoBehaviour
 
     }
 
+#if UNITY_EDITOR
     void DrawEdges()
     {
 
@@ -207,6 +209,7 @@ public class HitBoxTesting : MonoBehaviour
             Handles.DrawBezier(botStartPos4, botEndPos4, botStartPos4, botEndPos4, color, null, thickness);
         }
     }
+#endif
 
 
 }

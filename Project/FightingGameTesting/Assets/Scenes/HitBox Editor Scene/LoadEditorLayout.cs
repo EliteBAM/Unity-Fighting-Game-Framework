@@ -14,7 +14,7 @@ public class LoadEditorLayout : MonoBehaviour
     void Awake()
     {
         LayoutUtility.LoadLayout(layoutPath);
-        DestroyImmediate(gameObject);
+        //DestroyImmediate(gameObject);
     }
 
 }

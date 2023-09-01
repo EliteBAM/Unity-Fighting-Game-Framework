@@ -13,3 +13,40 @@ MonoBehaviour:
   m_Name: _back
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 11b1ed2caa0204f47b7554913b347566, type: 2}
+  hitBoxData:
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+    sizeChangeFrames: 
+  hitBoxNames:
+  - garfield
+  - oof
+  - potato
+  - fruit
+  - salad
+  - yummy
+  - yummy

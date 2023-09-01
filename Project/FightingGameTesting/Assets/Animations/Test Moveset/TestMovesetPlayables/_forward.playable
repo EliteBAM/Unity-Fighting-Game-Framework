@@ -13,3 +13,19 @@ MonoBehaviour:
   m_Name: _forward
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: c441ea0a509e0bd42a212ccaca23437b, type: 2}
+  hitBoxData:
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0
+  - boxType: 0
+    startFrame: 0
+    endFrame: 0

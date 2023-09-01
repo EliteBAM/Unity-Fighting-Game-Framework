@@ -11,9 +11,10 @@ public class FightAnimationPlayable : PlayableBehaviour
 
     public AnimationClipPlayable clipPlayable;
 
-    public ScriptPlayable<HitBoxPlayable> hitBoxData;
+    public ScriptPlayable<HitBoxPlayable> hitBoxDataPlayable;
+    public HitBoxPlayable hitBoxDataBehaviour;
 
-    public void Initialize(Playable owner, PlayableGraph graph, AnimationClip clip)
+    public void Initialize(Playable owner, PlayableGraph graph, AnimationClip clip, HitBoxData[] data)
     {
         this.owner = (ScriptPlayable<FightAnimationPlayable>)owner;
         owner.SetInputCount(2);
@@ -21,10 +22,12 @@ public class FightAnimationPlayable : PlayableBehaviour
 
         clipPlayable = AnimationClipPlayable.Create(graph, clip);
 
-        hitBoxData = ScriptPlayable<HitBoxPlayable>.Create(graph);
+        hitBoxDataPlayable = ScriptPlayable<HitBoxPlayable>.Create(graph);
+        hitBoxDataBehaviour = hitBoxDataPlayable.GetBehaviour();
+        hitBoxDataBehaviour.Initialize(data);
 
         graph.Connect(clipPlayable, 0, owner, 0);
-        graph.Connect(hitBoxData, 0, owner, 1);
+        graph.Connect(hitBoxDataPlayable, 0, owner, 1);
 
     }
 
@@ -36,7 +39,7 @@ public class FightAnimationPlayable : PlayableBehaviour
         clipPlayable.SetTime(0 - Time.deltaTime);
         clipPlayable.SetTime(0);
 
-        hitBoxData.SetTime(0 - Time.deltaTime);
+        hitBoxDataPlayable.SetTime(0 - Time.deltaTime);
         clipPlayable.SetTime(0);
     }
 
@@ -44,7 +47,7 @@ public class FightAnimationPlayable : PlayableBehaviour
     {
         owner.SetDuration(duration);
         clipPlayable.SetDuration(duration);
-        hitBoxData.SetDuration(duration);
+        hitBoxDataPlayable.SetDuration(duration);
 
         return duration;
     }
@@ -52,13 +55,13 @@ public class FightAnimationPlayable : PlayableBehaviour
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
         clipPlayable.Play();
-        hitBoxData.Play();
+        hitBoxDataPlayable.Play();
     }
 
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
         clipPlayable.Pause();
-        hitBoxData.Pause();
+        hitBoxDataPlayable.Pause();
     }
 
     public override void PrepareFrame(Playable playable, FrameData info)

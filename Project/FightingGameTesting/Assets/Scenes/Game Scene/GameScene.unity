@@ -1205,15 +1205,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641806456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e50078825424ea4186cdbca903d9183, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eb25305ed89b92419582fc59e0a8fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 0}
-  fileName: 
-  rig: {fileID: 0}
-  cam: {fileID: 0}
+  layoutPath: Assets\Scenes\Game Scene\My2by3Layout.wlt
 --- !u!1 &1729385196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,50 +1305,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 129886567}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1882816512
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1882816514}
-  - component: {fileID: 1882816513}
-  m_Layer: 0
-  m_Name: LayoutLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1882816513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882816512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb25305ed89b92419582fc59e0a8fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layoutPath: Assets/Scenes/Game Scene/My2by3Layout.wlt
---- !u!4 &1882816514
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882816512}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.42817, y: 9.048365, z: -51.585438}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073228382
 GameObject:
@@ -2102,6 +2055,7 @@ GameObject:
   - component: {fileID: 543450652129798027}
   - component: {fileID: 919132148476607794}
   - component: {fileID: 5866666020442963441}
+  - component: {fileID: 919132148476607797}
   - component: {fileID: 919132148476607796}
   - component: {fileID: 919132148476607795}
   m_Layer: 0
@@ -2140,7 +2094,8 @@ MonoBehaviour:
     jump: 0
     flippedSides: 0
   animationManager:
-    clips: []
+    fightAnimations: []
+    hitBoxRepository: []
   rb: {fileID: 0}
 --- !u!54 &919132148476607795
 Rigidbody:
@@ -2172,6 +2127,19 @@ CapsuleCollider:
   m_Height: 1.721875
   m_Direction: 1
   m_Center: {x: 0, y: 0.8609375, z: 0}
+--- !u!114 &919132148476607797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148476607793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a559261774aae84c83738655678208c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxRepository: []
 --- !u!1 &919132149247055398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2151,7 @@ GameObject:
   - component: {fileID: 543450653506358428}
   - component: {fileID: 919132149247055399}
   - component: {fileID: 5866666021817849574}
+  - component: {fileID: 919132149247055402}
   - component: {fileID: 919132149247055400}
   - component: {fileID: 919132149247055401}
   m_Layer: 0
@@ -2221,7 +2190,8 @@ MonoBehaviour:
     jump: 0
     flippedSides: 0
   animationManager:
-    clips: []
+    fightAnimations: []
+    hitBoxRepository: []
   rb: {fileID: 0}
 --- !u!136 &919132149247055400
 CapsuleCollider:
@@ -2253,6 +2223,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!114 &919132149247055402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149247055398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a559261774aae84c83738655678208c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxRepository: []
 --- !u!1 &951011102380517229
 GameObject:
   m_ObjectHideFlags: 0

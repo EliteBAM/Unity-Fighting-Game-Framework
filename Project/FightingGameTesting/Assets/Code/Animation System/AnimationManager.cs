@@ -11,22 +11,23 @@ public class AnimationManager
     PlayableGraph graph;
     AnimationSwitcherPlayable animationSwitcherBehaviour;
 
-    [SerializeField] FightAnimationPlayableAsset[] clips;
+    [SerializeField] FightAnimationPlayableAsset[] fightAnimations;
 
-    public AnimationManager(Animator animator, CharacterDataSO data)
+
+    public AnimationManager(Animator animator, HitBoxAnimator hitBoxAnimator, CharacterDataSO data)
     {
 
         //Get FightAnimation Playables
-        clips = new FightAnimationPlayableAsset[data.moveList.Length + data.basicAnimations.Length];
-        Debug.LogWarning("clips length: "  + clips.Length);
+        fightAnimations = new FightAnimationPlayableAsset[data.moveList.Length + data.basicAnimations.Length];
+        Debug.LogWarning("clips length: "  + fightAnimations.Length);
         for (int i = 0; i < data.basicAnimations.Length; i++)
         {
-            clips[i] = data.basicAnimations[i];
+            fightAnimations[i] = data.basicAnimations[i];
         }
         for (int i = 0; i < data.moveList.Length; i++)
         {
-            clips[i + data.basicAnimations.Length] = data.moveList[i].moveAnim;
-            Debug.LogWarning(clips[i].clip.name);
+            fightAnimations[i + data.basicAnimations.Length] = data.moveList[i].moveAnim;
+            Debug.LogWarning(fightAnimations[i].clip.name);
         }
 
         graph = PlayableGraph.Create();
@@ -36,13 +37,17 @@ public class AnimationManager
         var animationSwitcherPlayable = ScriptPlayable<AnimationSwitcherPlayable>.Create(graph);
         animationSwitcherBehaviour = animationSwitcherPlayable.GetBehaviour();
 
-        animationSwitcherBehaviour.Initialize(animationSwitcherPlayable, graph, clips);
 
         var animationPlayableOutput = AnimationPlayableOutput.Create(graph, "Animation Output", animator);
         var scriptPlayableOutput = ScriptPlayableOutput.Create(graph, "Hitbox Output");
 
         animationPlayableOutput.SetSourcePlayable(animationSwitcherPlayable, 0);
         scriptPlayableOutput.SetSourcePlayable(animationSwitcherPlayable, 1);
+        scriptPlayableOutput.SetUserData(hitBoxAnimator);
+
+        //must be initialized after creation of scriptPlayableOutput in order to capture non-null hitBoxAnimator reference
+        animationSwitcherBehaviour.Initialize(animationSwitcherPlayable, graph, fightAnimations);
+
 
         graph.Play();
 
