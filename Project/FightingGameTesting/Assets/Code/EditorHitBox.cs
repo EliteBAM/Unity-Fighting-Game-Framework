@@ -14,8 +14,8 @@ public class EditorHitBox : MonoBehaviour
 
     private BoxCollider collider;
 
-    private GameObject handle1;
-    private GameObject handle2;
+    public GameObject handle1;
+    public GameObject handle2;
 
     private Vector3 previousPosition;
 
@@ -84,13 +84,18 @@ public class EditorHitBox : MonoBehaviour
 
     void UpdateEnabled()
     {
-        if (HitBoxEditorManager.instance.currentFrame >= HitBoxEditorManager.instance.hitBoxData[index].startFrame && HitBoxEditorManager.instance.currentFrame < HitBoxEditorManager.instance.hitBoxData[index].endFrame)
+        if (HitBoxEditorManager.instance.currentFrame >= HitBoxEditorManager.instance.hitBoxData[index].startFrame && HitBoxEditorManager.instance.currentFrame <= HitBoxEditorManager.instance.hitBoxData[index].endFrame)
         {
             if(!isEnabled)
             {
                 Debug.Log("Enabling hitbox");
                 collider.enabled = true;
                 isEnabled = true;
+                if(isSelected)
+                {
+                    handle1.SetActive(true);
+                    handle2.SetActive(true);
+                }
             }
         }
         else if(isEnabled)
@@ -98,7 +103,11 @@ public class EditorHitBox : MonoBehaviour
             Debug.Log("Disabling hitbox");
             collider.enabled = false;
             isEnabled = false;
-            isSelected = false;
+            if(isSelected)
+            {
+                handle1.SetActive(false);
+                handle2.SetActive(false);
+            }
         }
     }
 

@@ -94,20 +94,33 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
     void DisplayTopAnchoredArea()
     {
         GUILayout.BeginVertical("box"); // "box" style to give it a distinct look
-        GUILayout.Label("This is the top anchored area");
+        GUILayout.Label("HitBox Tools:");
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();  // Center Horizontally
 
-        if (GUILayout.Button("Add HitBox", GUILayout.Width(Window.minSize.x * 0.9f), GUILayout.Height(Window.minSize.y / 8)))  // Define the button width or remove GUILayout.Width if you want it to auto-size
+        GUILayout.BeginVertical();
+
+
+        if (GUILayout.Button("Add HitBox", GUILayout.Width(Window.minSize.x * 0.9f), GUILayout.Height(Window.minSize.y / 12)))  // Define the button width or remove GUILayout.Width if you want it to auto-size
         {
             HitBoxEditorManager.instance.AddHitBox();
         }
 
+        GUILayout.Space(5);
+
+        if (GUILayout.Button("Remove HitBox", GUILayout.Width(Window.minSize.x * 0.9f), GUILayout.Height(Window.minSize.y / 12)))
+        {
+            HitBoxEditorManager.instance.RemoveHitBox();
+        }
+
+
+        GUILayout.EndVertical();
+
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
-        GUILayout.Space(20);
+        GUILayout.Space(10);
 
         GUILayout.EndVertical();
     }
@@ -123,7 +136,7 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
     {
         // This is an example. You can add your desired GUI elements here.
         GUILayout.BeginVertical("box"); // "box" style to give it a distinct look
-        GUILayout.Label("This is the bottom anchored area");
+        GUILayout.Label("Save Options:");
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();  // Center Horizontally
@@ -170,27 +183,33 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         EditorGUILayout.LabelField("Name: ", GUILayout.Width(40)); // Adjust the width as necessary
         HitBoxEditorManager.instance.hitBoxNames[index] = EditorGUILayout.TextField(name, GUILayout.Width(50)); // Adjust the width as necessary
         EditorGUILayout.Space(3);
-        if (GUILayout.Button("Hurt"))
+
+        if(HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
         {
-            Debug.Log("hurt button pressed");
-            if (HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
+            if (GUILayout.Button("Hit"))
             {
+                Debug.Log("hit button pressed");
                 Debug.Log("Switching to hurtbox");
                 item = HitBoxEditorManager.instance.ChangeHitBoxTypeData(index, HitBoxType.Hurt);
             }
-            else
+        }
+        else
+        {
+            if (GUILayout.Button("Hurt"))
             {
+                Debug.Log("hurt button pressed");
                 Debug.Log("Switching to hitbox");
                 item = HitBoxEditorManager.instance.ChangeHitBoxTypeData(index, HitBoxType.Hit);
             }
         }
+
         if (GUILayout.Button("Set Start"))
         {
-            // Set Start button logic here
+            item = HitBoxEditorManager.instance.ChangeStartFrame(item, HitBoxEditorManager.instance.currentFrame);
         }
         if (GUILayout.Button("Set End"))
         {
-            // Set End button logic here
+            item = HitBoxEditorManager.instance.ChangeEndFrame(item, HitBoxEditorManager.instance.currentFrame);
         }
         GUILayout.EndHorizontal();
         //row 1

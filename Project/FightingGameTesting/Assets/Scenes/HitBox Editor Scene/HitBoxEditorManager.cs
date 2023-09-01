@@ -47,10 +47,10 @@ public class HitBoxEditorManager : MonoBehaviour
     TimelineClip timelineClip;
 
     //Scene objects
-    public GameObject rig;
+    private GameObject rig;
     private GameObject cam;
     private Animator animator;
-    private GameObject[] hitBoxes;
+    private List<EditorHitBox> hitBoxes;
 
     //Camera Variables
     Vector3 defaultCameraPosition;
@@ -65,6 +65,7 @@ public class HitBoxEditorManager : MonoBehaviour
     {
         hitBoxData = new List<HitBoxData>();
         hitBoxNames = new List<string>();
+        hitBoxes = new List<EditorHitBox>();
 
         //init scene objects
         Debug.Log("HitBox Editor Started");
@@ -234,6 +235,29 @@ public class HitBoxEditorManager : MonoBehaviour
         newHitBoxObject.transform.position = rig.transform.position + (Vector3.up * 10);
         EditorHitBox script = newHitBoxObject.AddComponent<EditorHitBox>();
         script.index = hitBoxData.Count - 1;
+
+        hitBoxes.Add(script);
+    }
+
+    public void RemoveHitBox()
+    {
+        if(previousSelection != null)
+        {
+            hitBoxData.Remove(hitBoxData[previousSelection.index]);
+            hitBoxNames.Remove(hitBoxNames[previousSelection.index]);
+            hitBoxes.Remove(previousSelection);
+
+            Destroy(previousSelection.handle1);
+            Destroy(previousSelection.handle2);
+            Destroy(previousSelection.gameObject);
+
+            for(int i = previousSelection.index; i < hitBoxes.Count; i++) //update index of succeeding hitboxes to account for removal of a previous index
+                hitBoxes[i].index = i;
+
+            previousSelection = null;
+        }
+        else
+            Debug.Log("HitBox Not Removed. No HitBox Was Selected.");
     }
 
     public HitBoxData AppendSizeData(int hitBoxIndex, Vector2 center, Vector2 size)
@@ -294,7 +318,7 @@ public class HitBoxEditorManager : MonoBehaviour
         if (endFrame > hitBoxData.startFrame)
             hitBoxData.endFrame = endFrame;
 
-        Debug.Log("The hitbox startFrane has been changed to: " + hitBoxData.endFrame);
+        Debug.Log("The hitbox endFrame has been changed to: " + hitBoxData.endFrame);
 
         return hitBoxData;
     }
