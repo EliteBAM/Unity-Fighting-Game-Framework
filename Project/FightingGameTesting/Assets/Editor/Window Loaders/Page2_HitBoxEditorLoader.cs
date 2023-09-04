@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,17 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
     Texture2D hitBoxItemStyleTexture;
     GUIStyle hitBoxItemStyle;
 
+    Texture2D keyFramStyleTexture;
+    GUIStyle keyFrameStyle;
+
     Texture2D darkLineStyleTexture;
     GUIStyle darkLineStyle;
+
+    Texture2D lightLineStyleTexture;
+    GUIStyle lightLineStyle;
+
+    Texture2D selectedLineTexture;
+    GUIStyle selectedLineStyle;
 
     GUIStyle scrollViewStyle;
     GUIStyle horizontalScrollbarStyle;
@@ -27,6 +37,20 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         hitBoxItemStyleTexture.SetPixel(0, 0, new Color(0.2f, 0.2f, 0.2f, 1));  // You can adjust this color.
         hitBoxItemStyleTexture.Apply();
 
+        hitBoxItemStyle = new GUIStyle();
+        hitBoxItemStyle.normal.background = hitBoxItemStyleTexture;
+        hitBoxItemStyle.padding = new RectOffset(10, 10, 10, 10);  // adjust these values for desired padding
+        hitBoxItemStyle.border = new RectOffset(13, 13, 13, 13); // Adjust as needed for the specific texture.
+
+        // Create and apply the texture and style for the hitbox item.
+        keyFramStyleTexture = new Texture2D(1, 1);
+        keyFramStyleTexture.SetPixel(0, 0, new Color(1f, 0.55f, 0f, 1));  // You can adjust this color.
+        keyFramStyleTexture.Apply();
+
+        keyFrameStyle = new GUIStyle();
+        keyFrameStyle.normal.background = keyFramStyleTexture;
+        keyFrameStyle.margin = new RectOffset(0, 0, 0, 0);  // Horizontal space from the edges.
+
         // Create and apply the texture and style for the dark line.
         darkLineStyleTexture = new Texture2D(1, 1);
         darkLineStyleTexture.SetPixel(0, 0, new Color(0.15f, 0.15f, 0.15f, 1));  // You can adjust this color.
@@ -34,12 +58,26 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
 
         darkLineStyle = new GUIStyle();
         darkLineStyle.normal.background = darkLineStyleTexture;
-        darkLineStyle.margin = new RectOffset(10, 10, 0, 0);  // Horizontal space from the edges.
+        darkLineStyle.margin = new RectOffset(0, 0, 0, 0);  // Horizontal space from the edges.
 
-        hitBoxItemStyle = new GUIStyle();
-        hitBoxItemStyle.normal.background = hitBoxItemStyleTexture;
-        hitBoxItemStyle.padding = new RectOffset(10, 10, 10, 10);  // adjust these values for desired padding
-        hitBoxItemStyle.border = new RectOffset(13, 13, 13, 13); // Adjust as needed for the specific texture.
+        // Create and apply the texture and style for the dark line.
+        lightLineStyleTexture = new Texture2D(1, 1);
+        lightLineStyleTexture.SetPixel(0, 0, new Color(0.2f, 0.2f, 0.2f, 1));  // You can adjust this color.
+        lightLineStyleTexture.Apply();
+
+        lightLineStyle = new GUIStyle();
+        lightLineStyle.normal.background = lightLineStyleTexture;
+        lightLineStyle.margin = new RectOffset(0, 0, 0, 0);  // Horizontal space from the edges.
+
+        // Create and apply the texture and style for the dark line.
+        selectedLineTexture = new Texture2D(1, 1);
+        selectedLineTexture.SetPixel(0, 0, new Color(0f, 1f, 0f, 1));  // You can adjust this color.
+        selectedLineTexture.Apply();
+
+        selectedLineStyle = new GUIStyle();
+        selectedLineStyle.normal.background = selectedLineTexture;
+        selectedLineStyle.margin = new RectOffset(0, 0, 0, 0);  // Horizontal space from the edges.
+
 
         //scroll style
         scrollViewStyle = new GUIStyle(GUI.skin.scrollView);
@@ -84,6 +122,7 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         {
             DisplayHitboxMenuItem(HitBoxEditorManager.instance.hitBoxNames[i], HitBoxEditorManager.instance.hitBoxData[i], i);
         }
+        Window.Repaint();
 
         EditorGUILayout.EndScrollView();
 
@@ -165,26 +204,47 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
 
     void DisplayHitboxMenuItem(string name, HitBoxData item, int index)
     {
-        //EditorGUILayout.BeginHorizontal();
+        int frameIndex = Array.IndexOf(item.sizeChangeFrames, HitBoxEditorManager.instance.currentFrame);
 
-        //top border
-        GUILayout.BeginVertical(darkLineStyle);
-        GUILayout.Space(2);
+        // Start of outer vertical for top border
+        if (HitBoxEditorManager.instance.hitBoxes[index].isSelected)
+            EditorGUILayout.BeginVertical(selectedLineStyle);
+        else if (!HitBoxEditorManager.instance.hitBoxes[index].isSelected && frameIndex != -1)
+            EditorGUILayout.BeginVertical(keyFrameStyle);
+        else
+            EditorGUILayout.BeginVertical(darkLineStyle);
 
-        //left border
+        // Top border
+        EditorGUILayout.Space(2);
+
+        // Start of outer horizontal for left border
+        EditorGUILayout.BeginHorizontal();
+
+        // Left border
+        EditorGUILayout.Space(2);
+
+        // INNER CONTENT AND BORDERS 
+
+        // Top border 2
+        if (HitBoxEditorManager.instance.hitBoxes[index].isSelected && frameIndex != -1)
+            EditorGUILayout.BeginVertical(keyFrameStyle);
+        else
+            EditorGUILayout.BeginVertical(lightLineStyle);
+        EditorGUILayout.Space(2);
+
+        // Left Border 2
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.Space(2);
 
-        // Start a vertical group with the border style
         EditorGUILayout.BeginVertical(hitBoxItemStyle);
 
         // Row 1
-        GUILayout.BeginHorizontal();
+        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Name: ", GUILayout.Width(40)); // Adjust the width as necessary
         HitBoxEditorManager.instance.hitBoxNames[index] = EditorGUILayout.TextField(name, GUILayout.Width(50)); // Adjust the width as necessary
         EditorGUILayout.Space(3);
 
-        if(HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
+        if (HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
         {
             if (GUILayout.Button("Hit"))
             {
@@ -211,13 +271,13 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
         {
             item = HitBoxEditorManager.instance.ChangeEndFrame(item, HitBoxEditorManager.instance.currentFrame);
         }
-        GUILayout.EndHorizontal();
+        EditorGUILayout.EndHorizontal();
         //row 1
 
         EditorGUILayout.Space(3);
 
         // Row 2
-        GUILayout.BeginHorizontal();
+        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Start frame: ", GUILayout.Width(80)); // Adjust the width as necessary
         item = HitBoxEditorManager.instance.ChangeStartFrame(item, EditorGUILayout.IntField(item.startFrame, GUILayout.Width(50))); // Adjust the width as necessary
         EditorGUILayout.LabelField("End frame: ", GUILayout.Width(80)); // Adjust the width as necessary
@@ -227,7 +287,7 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
 
         // Row 3
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Remove Resize Key Frame"))
+        if (GUILayout.Button("Remove Current Resize Frame"))
         {
             item = HitBoxEditorManager.instance.RemoveSizeChangeFrame(item);
         }
@@ -236,21 +296,31 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
 
         HitBoxEditorManager.instance.hitBoxData[index] = item;
 
-        EditorGUILayout.EndVertical(); //end of inner box
+        EditorGUILayout.EndVertical(); //end of inner box   
 
-        //right border
+        // Right Border 2
         EditorGUILayout.Space(2);
+        EditorGUILayout.EndHorizontal(); // Close Left Border 2 horizontal
+
+        // Bottom Border 2
+        EditorGUILayout.Space(2);
+        EditorGUILayout.EndVertical(); // Close Top Border 2 vertical
+
+        // END OF INNER CONTENT AND BORDERS
+
+        // Right border of outer border
+        EditorGUILayout.Space(2);
+
+        // End outer horizontal for right border
         EditorGUILayout.EndHorizontal();
 
-        //bottom border
-        GUILayout.Space(2);
-        GUILayout.EndVertical();
+        // Bottom border of outer border
+        EditorGUILayout.Space(2);
 
-        //EditorGUILayout.Space(12);
-        //EditorGUILayout.EndHorizontal();
+        // End outer vertical for bottom border
+        EditorGUILayout.EndVertical();
 
-
-        //space between scroll menu items
+        // Space between scroll menu items
         GUILayout.Space(2);
     }
 }

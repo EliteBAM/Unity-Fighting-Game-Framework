@@ -50,7 +50,7 @@ public class HitBoxEditorManager : MonoBehaviour
     private GameObject rig;
     private GameObject cam;
     private Animator animator;
-    private List<EditorHitBox> hitBoxes;
+    public List<EditorHitBox> hitBoxes;
 
     //Camera Variables
     Vector3 defaultCameraPosition;
