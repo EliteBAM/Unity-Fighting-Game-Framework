@@ -13,7 +13,8 @@ public struct HitBoxData
 
     public int[] sizeChangeFrames;
 
-    public (Vector2 Center, Vector2 Size)[] sizeChangeFrameData;
+    public Vector2[] center;
+    public Vector2[] size;
 
 }
 

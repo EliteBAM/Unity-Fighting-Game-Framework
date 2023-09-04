@@ -119,7 +119,10 @@ public class HitBoxEditorManager : MonoBehaviour
                     GameObject newHitBoxObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     newHitBoxObject.transform.localScale = Vector3.one * 5;
                     newHitBoxObject.transform.position = rig.transform.position + (Vector3.up * 10);
-                    newHitBoxObject.AddComponent<EditorHitBox>();
+                    EditorHitBox script = newHitBoxObject.AddComponent<EditorHitBox>();
+                    script.index = i;
+
+                    hitBoxes.Add(script);
                 }
             }
 
@@ -225,7 +228,8 @@ public class HitBoxEditorManager : MonoBehaviour
         newHitBoxData.startFrame = 0;
         newHitBoxData.endFrame = 1;
         newHitBoxData.sizeChangeFrames = new int[0];
-        newHitBoxData.sizeChangeFrameData = new (Vector2, Vector2)[0];
+        newHitBoxData.center = new Vector2[0];
+        newHitBoxData.size = new Vector2[0];
 
         hitBoxData.Add(newHitBoxData);
         hitBoxNames.Add("new Hitbox");
@@ -268,7 +272,8 @@ public class HitBoxEditorManager : MonoBehaviour
         Debug.Log("frame index of current frame: " + frameIndex);
         if (frameIndex != -1)
         {
-            hitBoxData.sizeChangeFrameData[frameIndex] = (center, size);
+            hitBoxData.center[frameIndex] = center;
+            hitBoxData.size[frameIndex] = size;
         }
         else
         {
@@ -280,13 +285,21 @@ public class HitBoxEditorManager : MonoBehaviour
             newTimeChangeFrames[newTimeChangeFrames.Length - 1] = (int)currentFrame;
             hitBoxData.sizeChangeFrames = newTimeChangeFrames;
 
-            //append data list
-            (Vector2 Center, Vector2 Size)[] newSizeChangeFrameData = new (Vector2 Center, Vector2 Size)[hitBoxData.sizeChangeFrameData.Length + 1];
-            for (int i = 0; i < hitBoxData.sizeChangeFrameData.Length; i++)
-                newSizeChangeFrameData[i] = hitBoxData.sizeChangeFrameData[i];
+            //append center data list
+            Vector2[] newCenterData = new Vector2[hitBoxData.center.Length + 1];
+            for (int i = 0; i < hitBoxData.center.Length; i++)
+                newCenterData[i] = hitBoxData.center[i];
 
-            newSizeChangeFrameData[newSizeChangeFrameData.Length - 1] = (center, size);
-            hitBoxData.sizeChangeFrameData = newSizeChangeFrameData;
+            newCenterData[newCenterData.Length - 1] = center;
+            hitBoxData.center = newCenterData;
+
+            //append size data list
+            Vector2[] newSizeData = new Vector2[hitBoxData.size.Length + 1];
+            for (int i = 0; i < hitBoxData.size.Length; i++)
+                newSizeData[i] = hitBoxData.size[i];
+
+            newSizeData[newSizeData.Length - 1] = size;
+            hitBoxData.size = newSizeData;
         }
 
         return hitBoxData;
@@ -349,17 +362,29 @@ public class HitBoxEditorManager : MonoBehaviour
 
             hitBoxData.sizeChangeFrames = newSizeChangeFrames;
 
-            //append data list
-            (Vector2 Center, Vector2 Size)[] newSizeChangeFrameData = new (Vector2 Center, Vector2 Size)[hitBoxData.sizeChangeFrameData.Length - 1];
-            for (int i = 0; i < hitBoxData.sizeChangeFrameData.Length; i++)
+            //append center data list
+            Vector2[] newCenterData = new Vector2[hitBoxData.center.Length - 1];
+            for (int i = 0; i < hitBoxData.center.Length; i++)
             {
                 if (i < frameIndex)
-                    newSizeChangeFrameData[i] = hitBoxData.sizeChangeFrameData[i];
+                    newCenterData[i] = hitBoxData.center[i];
                 else if (i > frameIndex)
-                    newSizeChangeFrameData[i - 1] = hitBoxData.sizeChangeFrameData[i];
+                    newCenterData[i - 1] = hitBoxData.center[i];
             }
 
-            hitBoxData.sizeChangeFrameData = newSizeChangeFrameData;
+            hitBoxData.center = newCenterData;
+
+            //append size data list
+            Vector2[] newSizeData = new Vector2[hitBoxData.size.Length - 1];
+            for (int i = 0; i < hitBoxData.size.Length; i++)
+            {
+                if (i < frameIndex)
+                    newSizeData[i] = hitBoxData.size[i];
+                else if (i > frameIndex)
+                    newSizeData[i - 1] = hitBoxData.size[i];
+            }
+
+            hitBoxData.size = newSizeData;
         }
         else
         {
@@ -367,6 +392,15 @@ public class HitBoxEditorManager : MonoBehaviour
         }
 
         return hitBoxData;
+    }
+
+    public void SaveData()
+    {
+        _fightAnimationAsset.hitBoxData = hitBoxData.ToArray();
+        _fightAnimationAsset.hitBoxNames = hitBoxNames.ToArray();
+
+        EditorUtility.SetDirty(_fightAnimationAsset);
+        AssetDatabase.SaveAssets();
     }
 
     public void ResetCamera()

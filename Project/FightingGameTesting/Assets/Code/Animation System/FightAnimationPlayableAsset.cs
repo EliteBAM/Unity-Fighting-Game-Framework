@@ -12,7 +12,7 @@ public class FightAnimationPlayableAsset : PlayableAsset
     public HitBoxData[] hitBoxData;
     
     //for use in hitbox editor only
-    //[HideInInspector]
+    [HideInInspector]
     public string[] hitBoxNames;
 
     public FightAnimationPlayableAsset(AnimationClip clip)

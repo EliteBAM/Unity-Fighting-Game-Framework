@@ -182,7 +182,7 @@ public class Page2_HitBoxEditorLoader : IHitBoxEditorWindowLoader
 
         if (GUILayout.Button("Save Changes", GUILayout.Width(Window.minSize.x * 0.9f / 3), GUILayout.Height(Window.minSize.y / 12f)))  // Define the button width or remove GUILayout.Width if you want it to auto-size
         {
-            HitBoxEditorManager.instance.hitBoxData.Add(new HitBoxData());
+            HitBoxEditorManager.instance.SaveData();
         }
 
         if (GUILayout.Button("Save and Exit", GUILayout.Width(Window.minSize.x * 0.9f / 3), GUILayout.Height(Window.minSize.y / 12f)))  // Define the button width or remove GUILayout.Width if you want it to auto-size

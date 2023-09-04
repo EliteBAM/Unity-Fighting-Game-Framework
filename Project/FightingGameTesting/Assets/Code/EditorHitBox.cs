@@ -126,8 +126,8 @@ public class EditorHitBox : MonoBehaviour
 
             if (index != -1)
             {
-                center = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Center;
-                size = HitBoxEditorManager.instance.hitBoxData[this.index].sizeChangeFrameData[index].Size;
+                center = HitBoxEditorManager.instance.hitBoxData[this.index].center[index];
+                size = HitBoxEditorManager.instance.hitBoxData[this.index].size[index];
 
                 transform.position = center;
                 transform.localScale = size;
