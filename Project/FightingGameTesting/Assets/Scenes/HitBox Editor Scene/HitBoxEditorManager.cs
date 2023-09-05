@@ -235,6 +235,7 @@ public class HitBoxEditorManager : MonoBehaviour
         hitBoxNames.Add("new Hitbox");
 
         GameObject newHitBoxObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        newHitBoxObject.transform.SetParent(rig.transform);
         newHitBoxObject.transform.localScale = Vector3.one * 5;
         newHitBoxObject.transform.position = rig.transform.position + (Vector3.up * 10);
         EditorHitBox script = newHitBoxObject.AddComponent<EditorHitBox>();

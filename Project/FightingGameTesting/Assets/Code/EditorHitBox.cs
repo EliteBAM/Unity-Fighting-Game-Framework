@@ -18,22 +18,39 @@ public class EditorHitBox : MonoBehaviour
     public GameObject handle2;
 
     private Vector3 previousPosition;
+    Transform character;
 
-    Vector3 center;
-    Vector3 size;
+    public Vector3 center;
+    public Vector3 size;
 
     void Start()
     {
-        previousPosition = transform.position;
+        previousPosition = transform.localPosition;
+        character = transform.parent.parent;
+        transform.localScale = new Vector3(transform.localScale.x / character.localScale.x,
+                                           transform.localScale.y / character.localScale.y,
+                                           transform.localScale.z / character.localScale.z);
+
+        InitializeHandles();
+
+
+        // Calculate the midpoint between two handles
+        center = (handle1.transform.position + handle2.transform.position) / 2;
+
+        // Calculate the dimensions of the box based on the handle positions
+        size = new Vector3(
+            Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x) / character.localScale.x,
+            Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y) / character.localScale.y,
+            Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z) / character.localScale.z
+        );
 
         collider = GetComponent<BoxCollider>();
         transform.GetComponent<MeshRenderer>().enabled = false;
 
-        InitializeHandles();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         ShowHandles();
 
@@ -51,16 +68,6 @@ public class EditorHitBox : MonoBehaviour
     {
         if(isEnabled)
         {
-            // Calculate the midpoint between two handles
-            Vector3 midpoint = (handle1.transform.position + handle2.transform.position) / 2;
-
-            // Calculate the dimensions of the box based on the handle positions
-            Vector3 size = new Vector3(
-                Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x),
-                Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y),
-                Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z)
-            );
-
             // Set gizmo color
             if (HitBoxEditorManager.instance.hitBoxData[index].boxType == HitBoxType.Hit)
                 Gizmos.color = new Color(1, 0, 0, 0.5f);
@@ -68,10 +75,10 @@ public class EditorHitBox : MonoBehaviour
                 Gizmos.color = new Color(0, 1, 0, 0.5f);
 
             // Draw the wireframe cube
-            Gizmos.DrawWireCube(midpoint, new Vector3(size.x, size.y, size.z));
+            Gizmos.DrawWireCube(center, size * character.localScale.x);
 
             // Draw the solid cube
-            Gizmos.DrawCube(midpoint, new Vector3(size.x, size.y, size.z));
+            Gizmos.DrawCube(center, size * character.localScale.x);
         }
     }
 
@@ -132,8 +139,8 @@ public class EditorHitBox : MonoBehaviour
                 transform.position = center;
                 transform.localScale = size;
 
-                handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2, -transform.localScale.y / 2, 0);
-                handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2, transform.localScale.y / 2);
+                handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2 * character.localScale.x, -transform.localScale.y / 2 * character.localScale.y, 0);
+                handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2 * character.localScale.x, transform.localScale.y / 2 * character.localScale.y, 0);
             }
         }
     }
@@ -142,7 +149,7 @@ public class EditorHitBox : MonoBehaviour
     {
         if(handlesVisible)
         {
-            previousPosition = transform.position;
+            previousPosition = transform.localPosition;
 
             // If left mouse button is pressed, try to start dragging
             if (Input.GetMouseButtonDown(0))
@@ -176,13 +183,13 @@ public class EditorHitBox : MonoBehaviour
             Vector3 handle1Position = handle1.transform.position;
             Vector3 handle2Position = handle2.transform.position;
 
-
             size = new Vector3(
-                Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x),
-                Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y),
-                Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z)
+                Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x) / character.localScale.x,
+                Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y) / character.localScale.y,
+                Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z) / character.localScale.z
             );
 
+            //center = transform.InverseTransformPoint((handle1Position + handle2Position) / 2);
             center = (handle1Position + handle2Position) / 2;
 
             transform.position = center;
@@ -191,7 +198,7 @@ public class EditorHitBox : MonoBehaviour
             handle1.transform.position = handle1Position;
             handle2.transform.position = handle2Position;
 
-            if (transform.position != previousPosition)
+            if (transform.localPosition != previousPosition)
                 HitBoxEditorManager.instance.hitBoxData[index] = HitBoxEditorManager.instance.AppendSizeData(index, transform.position, size);
 
         }
@@ -205,6 +212,7 @@ public class EditorHitBox : MonoBehaviour
         handle1Renderer.material.renderQueue = 4001;
         handle1Renderer.sharedMaterial.color = Color.green;
         handle1.transform.localScale = Vector3.one * 3;
+        handle1.transform.SetParent(transform.parent);
 
 
         handle2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -213,6 +221,7 @@ public class EditorHitBox : MonoBehaviour
         handle2Renderer.material.renderQueue = 4001;
         handle2Renderer.sharedMaterial.color = Color.green;
         handle2.transform.localScale = Vector3.one * 3;
+        handle2.transform.SetParent(transform.parent);
 
 
         handle1.tag = "handle";
@@ -221,8 +230,8 @@ public class EditorHitBox : MonoBehaviour
         handle1.layer = 6;
         handle2.layer = 6;
 
-        handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2, -transform.localScale.y / 2, 0);
-        handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2, transform.localScale.y / 2);
+        handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2 * character.localScale.x, -transform.localScale.y / 2 * character.localScale.y, 0);
+        handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2 * character.localScale.x, transform.localScale.y / 2 * character.localScale.y, 0);
 
         handle1.SetActive(false);
         handle2.SetActive(false);

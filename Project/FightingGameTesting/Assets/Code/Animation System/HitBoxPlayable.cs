@@ -37,6 +37,13 @@ public class HitBoxPlayable : PlayableBehaviour
         //update hit or hurt value
         //update enabled or disabled status
 
+        for (int i = 0; i < data.Length; i++)
+        {
+            Debug.Log("so the hitbox playable is running the prepare frame loop: " + i);
+            Debug.Log("Frame Id: " + info.frameId%47);
+            animator.UpdateHitBox(data[i], info.frameId%47, i);
+        }
+
 
     }
 }

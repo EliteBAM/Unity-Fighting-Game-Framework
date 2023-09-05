@@ -13,16 +13,5 @@ MonoBehaviour:
   m_Name: _idle
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: d8962bbba3d889d4097342046f5cbffc, type: 2}
-  hitBoxData:
-  - boxType: 0
-    startFrame: 0
-    endFrame: 0
-  - boxType: 0
-    startFrame: 0
-    endFrame: 0
-  - boxType: 0
-    startFrame: 0
-    endFrame: 0
-  - boxType: 0
-    startFrame: 0
-    endFrame: 0
+  hitBoxData: []
+  hitBoxNames: []
