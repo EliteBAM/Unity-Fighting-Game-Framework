@@ -20,8 +20,8 @@ public class EditorHitBox : MonoBehaviour
     private Vector3 previousPosition;
     Transform character;
 
-    public Vector3 center;
-    public Vector3 size;
+    public Vector2 center;
+    public Vector2 size;
 
     void Start()
     {
@@ -31,18 +31,12 @@ public class EditorHitBox : MonoBehaviour
                                            transform.localScale.y / character.localScale.y,
                                            transform.localScale.z / character.localScale.z);
 
+
         InitializeHandles();
+        CalculateSizeFromHandles();
 
-
-        // Calculate the midpoint between two handles
-        center = (handle1.transform.position + handle2.transform.position) / 2;
-
-        // Calculate the dimensions of the box based on the handle positions
-        size = new Vector3(
-            Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x) / character.localScale.x,
-            Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y) / character.localScale.y,
-            Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z) / character.localScale.z
-        );
+        transform.localPosition = new Vector3(0, center.y, center.x);
+        transform.localScale = new Vector3(size.x, size.y, 0);
 
         collider = GetComponent<BoxCollider>();
         transform.GetComponent<MeshRenderer>().enabled = false;
@@ -74,11 +68,17 @@ public class EditorHitBox : MonoBehaviour
             else
                 Gizmos.color = new Color(0, 1, 0, 0.5f);
 
+            Vector2 worldSpaceSize = new Vector2(
+                Mathf.Abs((handle2.transform.localPosition.z - handle1.transform.localPosition.z) * character.localScale.z),
+                Mathf.Abs((handle2.transform.localPosition.y - handle1.transform.localPosition.y) * character.localScale.y)
+            );
+
+            Debug.Log("DRAWING GIZMOS: SIZE X: " + worldSpaceSize.x + " SIZE Y: " + worldSpaceSize.y);
             // Draw the wireframe cube
-            Gizmos.DrawWireCube(center, size * character.localScale.x);
+            Gizmos.DrawWireCube(transform.position, new Vector3(worldSpaceSize.x, worldSpaceSize.y, 0));
 
             // Draw the solid cube
-            Gizmos.DrawCube(center, size * character.localScale.x);
+            Gizmos.DrawCube(transform.position, new Vector3(worldSpaceSize.x, worldSpaceSize.y, 0));
         }
     }
 
@@ -136,11 +136,12 @@ public class EditorHitBox : MonoBehaviour
                 center = HitBoxEditorManager.instance.hitBoxData[this.index].center[index];
                 size = HitBoxEditorManager.instance.hitBoxData[this.index].size[index];
 
-                transform.position = center;
-                transform.localScale = size;
+                Debug.Log("Getting position for frame: " + center);
+                transform.localPosition = new Vector3(0, center.y, center.x);
+                transform.localScale = new Vector3(size.x, size.y, 0);
 
-                handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2 * character.localScale.x, -transform.localScale.y / 2 * character.localScale.y, 0);
-                handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2 * character.localScale.x, transform.localScale.y / 2 * character.localScale.y, 0);
+                handle1.transform.localPosition = transform.localPosition + new Vector3(0, -transform.localScale.y / 2, -transform.localScale.x / 2);
+                handle2.transform.localPosition = transform.localPosition + new Vector3(0, transform.localScale.y / 2, transform.localScale.x / 2);
             }
         }
     }
@@ -149,8 +150,6 @@ public class EditorHitBox : MonoBehaviour
     {
         if(handlesVisible)
         {
-            previousPosition = transform.localPosition;
-
             // If left mouse button is pressed, try to start dragging
             if (Input.GetMouseButtonDown(0))
             {
@@ -178,30 +177,39 @@ public class EditorHitBox : MonoBehaviour
                 hit.transform.Translate(difference.x * dragSpeed, difference.y * dragSpeed, 0, Space.Self);
 
                 lastMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
+                SetSize();
             }
 
-            Vector3 handle1Position = handle1.transform.position;
-            Vector3 handle2Position = handle2.transform.position;
-
-            size = new Vector3(
-                Mathf.Abs(handle2.transform.position.x - handle1.transform.position.x) / character.localScale.x,
-                Mathf.Abs(handle2.transform.position.y - handle1.transform.position.y) / character.localScale.y,
-                Mathf.Abs(handle2.transform.position.z - handle1.transform.position.z) / character.localScale.z
-            );
-
-            //center = transform.InverseTransformPoint((handle1Position + handle2Position) / 2);
-            center = (handle1Position + handle2Position) / 2;
-
-            transform.position = center;
-            transform.localScale = size;
-
-            handle1.transform.position = handle1Position;
-            handle2.transform.position = handle2Position;
-
-            if (transform.localPosition != previousPosition)
-                HitBoxEditorManager.instance.hitBoxData[index] = HitBoxEditorManager.instance.AppendSizeData(index, transform.position, size);
-
         }
+    }
+
+    public void CalculateSizeFromHandles()
+    {
+        //Calculate size after handle adjustment
+        size = new Vector2(
+            Mathf.Abs(handle2.transform.localPosition.z - handle1.transform.localPosition.z),
+            Mathf.Abs(handle2.transform.localPosition.y - handle1.transform.localPosition.y)
+        );
+
+        //calculate center after handle adjustment
+        Vector2 handle1_ZY_LocalPos = new Vector2(handle1.transform.localPosition.z, handle1.transform.localPosition.y);
+        Vector2 handle2_ZY_LocalPos = new Vector2(handle2.transform.localPosition.z, handle2.transform.localPosition.y);
+        center = (handle1_ZY_LocalPos + handle2_ZY_LocalPos) / 2;
+    }
+
+    public void SetSize()
+    {
+        previousPosition = transform.localPosition;
+
+        CalculateSizeFromHandles();
+
+        //Set new center and size
+        transform.localPosition = new Vector3(0, center.y, center.x);
+        transform.localScale = new Vector3(size.x, size.y, 0);
+
+        if (transform.localPosition != previousPosition)
+            HitBoxEditorManager.instance.hitBoxData[index] = 
+                HitBoxEditorManager.instance.AppendSizeData(index, center, size);
     }
 
     private void InitializeHandles()
@@ -230,8 +238,8 @@ public class EditorHitBox : MonoBehaviour
         handle1.layer = 6;
         handle2.layer = 6;
 
-        handle1.transform.position = transform.position + new Vector3(-transform.localScale.x / 2 * character.localScale.x, -transform.localScale.y / 2 * character.localScale.y, 0);
-        handle2.transform.position = transform.position + new Vector3(transform.localScale.x / 2 * character.localScale.x, transform.localScale.y / 2 * character.localScale.y, 0);
+        handle1.transform.localPosition = transform.localPosition + new Vector3(0, -transform.localScale.y / 2, -transform.localScale.x / 2);
+        handle2.transform.localPosition = transform.localPosition + new Vector3(0, transform.localScale.y / 2, transform.localScale.x / 2);
 
         handle1.SetActive(false);
         handle2.SetActive(false);

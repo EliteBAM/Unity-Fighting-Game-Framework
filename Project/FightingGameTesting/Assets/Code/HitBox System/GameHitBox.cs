@@ -26,7 +26,8 @@ public class GameHitBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.localPosition = new Vector3(0, center.y, center.x);
+        transform.localScale = new Vector3(size.x, size.y, 0);
     }
 
     private void OnDrawGizmos()

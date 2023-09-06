@@ -70,7 +70,7 @@ public class HitBoxEditorManager : MonoBehaviour
         //init scene objects
         Debug.Log("HitBox Editor Started");
         rig = GameObject.FindGameObjectWithTag("Player");
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = GameObject.FindGameObjectWithTag("HitBoxEditorCameras");
         animator = rig.GetComponent<Animator>();
         defaultCameraPosition = new Vector3(0, 13, 76);
 
@@ -94,6 +94,12 @@ public class HitBoxEditorManager : MonoBehaviour
         SelectHitboxes();
 
     }
+
+    private void LateUpdate()
+    {
+        UpdateCamera();
+    }
+
     void InitializeSingleton()
     {
         if (instance == null)
@@ -119,6 +125,7 @@ public class HitBoxEditorManager : MonoBehaviour
                     GameObject newHitBoxObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     newHitBoxObject.transform.localScale = Vector3.one * 5;
                     newHitBoxObject.transform.position = rig.transform.position + (Vector3.up * 10);
+                    newHitBoxObject.transform.SetParent(rig.transform);
                     EditorHitBox script = newHitBoxObject.AddComponent<EditorHitBox>();
                     script.index = i;
 
@@ -408,6 +415,11 @@ public class HitBoxEditorManager : MonoBehaviour
     {
         cam.transform.position = defaultCameraPosition;
         cam.transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    public void UpdateCamera()
+    {
+        cam.transform.position = defaultCameraPosition + rig.transform.position;
     }
 
 }

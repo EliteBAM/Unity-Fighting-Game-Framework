@@ -38,7 +38,9 @@ public class HitBoxAnimator : MonoBehaviour
 
         for (int i = hitBoxRepository.Count; i < hitBoxCount; i++)
         {
-            GameObject newEmpty = new GameObject("Empty HitBox :D");
+            GameObject newEmpty = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            newEmpty.name = "Empty HitBox :D";
+            newEmpty.GetComponent<BoxCollider>().enabled = false;
             newEmpty.transform.SetParent(transform);
             newEmpty.transform.localPosition = Vector3.zero;
             //just for fun:
