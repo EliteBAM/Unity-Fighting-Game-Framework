@@ -28,6 +28,14 @@ public class HitBoxPlayable : PlayableBehaviour
         animator.AddHitBoxes(data.Length);
     }
 
+    public override void OnBehaviourPlay(Playable playable, FrameData info)
+    {
+        for (int i = 0; i < data.Length; i++)
+        {
+            animator.ChangeBoxType(data[i], i);
+        }
+    }
+
     public override void PrepareFrame(Playable playable, FrameData info)
     {
 
@@ -37,11 +45,23 @@ public class HitBoxPlayable : PlayableBehaviour
         //update hit or hurt value
         //update enabled or disabled status
 
+        // Assuming a frame rate of 30 fps for the animation clip
+        // This can change based on your actual clip's frame rate.
+        const float frameRate = 60f;
+
+        double totalFrames = playable.GetDuration() * frameRate;
+        double currentFrame = playable.GetTime() * frameRate;
+
+        // Floor it to get the integer frame number
+        int frameNumber = Mathf.FloorToInt((float)currentFrame);
+
+        //Debug.Log("Current Frame: " + frameNumber);
+
         for (int i = 0; i < data.Length; i++)
         {
             Debug.Log("so the hitbox playable is running the prepare frame loop: " + i);
-            Debug.Log("Frame Id: " + info.frameId%47);
-            animator.UpdateHitBox(data[i], info.frameId%47, i);
+            Debug.Log("Frame: " + frameNumber);
+            animator.UpdateHitBox(data[i], frameNumber, i);
         }
 
 

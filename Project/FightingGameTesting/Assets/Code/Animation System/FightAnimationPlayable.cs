@@ -64,10 +64,4 @@ public class FightAnimationPlayable : PlayableBehaviour
         hitBoxDataPlayable.Pause();
     }
 
-    public override void PrepareFrame(Playable playable, FrameData info)
-    {
-
-
-
-    }
 }

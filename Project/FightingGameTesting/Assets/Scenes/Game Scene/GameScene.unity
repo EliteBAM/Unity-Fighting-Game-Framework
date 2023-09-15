@@ -770,7 +770,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 963194228}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -987,7 +987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1392431747}
   - component: {fileID: 1392431746}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2095,7 +2095,6 @@ MonoBehaviour:
     flippedSides: 0
   animationManager:
     fightAnimations: []
-    hitBoxRepository: []
   rb: {fileID: 0}
 --- !u!54 &919132148476607795
 Rigidbody:
@@ -2191,7 +2190,6 @@ MonoBehaviour:
     flippedSides: 0
   animationManager:
     fightAnimations: []
-    hitBoxRepository: []
   rb: {fileID: 0}
 --- !u!136 &919132149247055400
 CapsuleCollider:
