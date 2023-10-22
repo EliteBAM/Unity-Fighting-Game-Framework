@@ -24,33 +24,39 @@ MonoBehaviour:
   moveList:
   - moveName: Light Punch
     moveAnim: {fileID: 11400000, guid: 4829a87c95d307b48ab45eee76084631, type: 2}
+    hitAnim: {fileID: 11400000, guid: 72b1e69005817c640b545233684c1065, type: 2}
     inputSequence:
     - keys: 04000000
       frameWindow: 0
   - moveName: Heavy Punch
     moveAnim: {fileID: 11400000, guid: 888ed32d452d4f046b2fc5459f7431c8, type: 2}
+    hitAnim: {fileID: 11400000, guid: 0d93ec6470fbd3641b70a396e22ed429, type: 2}
     inputSequence:
     - keys: 01000000
       frameWindow: 0
   - moveName: Light Kick
     moveAnim: {fileID: 11400000, guid: be85d7644db77014e82fa2e49ce24b27, type: 2}
+    hitAnim: {fileID: 11400000, guid: aa7003614dfe0f84c8a6f6835d8ed585, type: 2}
     inputSequence:
     - keys: 02000000
       frameWindow: 0.16
   - moveName: Heavy Kick
     moveAnim: {fileID: 11400000, guid: c12cec574f7766841abd963ed50d7874, type: 2}
+    hitAnim: {fileID: 11400000, guid: 26484e6499ac763458d6ad35a135e809, type: 2}
     inputSequence:
     - keys: 03000000
       frameWindow: 0.16
-  - moveName: Water Elemental's Wrath
+  - moveName: Jump Kick
     moveAnim: {fileID: 11400000, guid: 255caad681633094ab787a843855ee98, type: 2}
+    hitAnim: {fileID: 11400000, guid: c2c804796e4ba584ab5b8869fefebb4e, type: 2}
     inputSequence:
     - keys: 03000000
       frameWindow: 0.16
     - keys: 02000000
       frameWindow: 0.16
-  - moveName: Water Elemental's Retribution
+  - moveName: 360 Round House Kick
     moveAnim: {fileID: 11400000, guid: dbcae52be5097344285bab56ce10437b, type: 2}
+    hitAnim: {fileID: 11400000, guid: 1cc716356f0abd749aaf1fa43cfedfdf, type: 2}
     inputSequence:
     - keys: 03000000
       frameWindow: 0.16
@@ -58,13 +64,15 @@ MonoBehaviour:
       frameWindow: 0.16
     - keys: 01000000
       frameWindow: 0
-  - moveName: Tidal Wave
+  - moveName: 720 Hook Kick
     moveAnim: {fileID: 11400000, guid: 74396051cd5e00648afdcfc7f23e0da1, type: 2}
+    hitAnim: {fileID: 11400000, guid: d89f9a2722007ce4fac126f02555e629, type: 2}
     inputSequence:
     - keys: 0c00000002000000
       frameWindow: 0
-  - moveName: Tidal Kick
+  - moveName: Shuffle Roundhouse
     moveAnim: {fileID: 11400000, guid: 0377b0504a1ba8447a194d729a966ae1, type: 2}
+    hitAnim: {fileID: 11400000, guid: 46ab16b264275bd47a7435082f18ce72, type: 2}
     inputSequence:
     - keys: 02000000
       frameWindow: 1

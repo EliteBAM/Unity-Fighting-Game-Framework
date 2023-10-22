@@ -1,5 +1,4 @@
 public enum CharacterRoster
 {
-    WaterShaman,
-    FireShaman
+    TestCharacter
 }

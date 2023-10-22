@@ -10,6 +10,7 @@ public class HitBoxAnimator : MonoBehaviour
     public void ChangeBoxType(HitBoxData data, int index)
     {
         hitBoxRepository[index].type = data.boxType;
+        hitBoxRepository[index].tag = data.boxType.ToString();
     }
 
     public void UpdateHitBox(HitBoxData data, int currentFrame, int index)
@@ -37,11 +38,21 @@ public class HitBoxAnimator : MonoBehaviour
         {
             GameObject newEmpty = new GameObject(); //GameObject.CreatePrimitive(PrimitiveType.Cube);
             newEmpty.name = "HitBox " + (i + 1);
-            newEmpty.AddComponent<BoxCollider>().enabled = false;
             newEmpty.transform.SetParent(transform);
             newEmpty.transform.localPosition = Vector3.zero;
+
+            BoxCollider collider = newEmpty.AddComponent<BoxCollider>();
+            collider.enabled = false;
+            collider.isTrigger = true;
+
+            if(transform.gameObject.CompareTag("Player 1"))
+                newEmpty.gameObject.layer = 7;
+            else if (transform.gameObject.CompareTag("Player 2"))
+                newEmpty.gameObject.layer = 8;
+
             //just for fun:
             HitBox script = newEmpty.AddComponent<HitBox>();
+            script.tag = script.type.ToString(); //set tag of the gameobject to the default box type, hit
 
             Debug.Log("adding game hitbox to repository");
             hitBoxRepository.Add(script);

@@ -18,7 +18,6 @@ public class HitBox : MonoBehaviour
 
     void Start()
     {
-
         collider = GetComponent<BoxCollider>();
     }
 
@@ -26,12 +25,32 @@ public class HitBox : MonoBehaviour
     void LateUpdate()
     {
         transform.localPosition = new Vector3(0, center.y, center.x);
-        transform.localScale = new Vector3(size.x, size.y, 0);
+        transform.localScale = new Vector3(size.x, size.y, 5);       //TEMPORARILY MADE HITBOXES SUPER WIDE
     }
 
     private void OnDrawGizmos()
     {
         DrawHitboxGizmos();
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        Debug.Log("we're colliding with something");
+        //thanks to collision layers hitboxes will only interact with enemy hitboxes, so no need to check for same-team collisions
+        if(type == HitBoxType.Hurt && collision.gameObject.tag == HitBoxType.Hit.ToString())
+        {
+            //somehow, in here, compute the hit.
+            //play animation, take damage, update all systems, etc. How do I get out of here?
+            Debug.Log("someone got hit!");
+        }
+
+        if(type == HitBoxType.Hit)
+        {
+            if (collision.gameObject.GetComponent<HitBox>().type == HitBoxType.Hit)
+            {
+
+            }
+        }
     }
 
     void DrawHitboxGizmos()

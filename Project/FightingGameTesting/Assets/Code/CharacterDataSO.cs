@@ -29,5 +29,6 @@ public class Move
 {
     public string moveName;
     public FightAnimationPlayableAsset moveAnim;
+    public FightAnimationPlayableAsset hitAnim;
     public List<SequenceBlock> inputSequence;
 }

@@ -9,6 +9,8 @@ TagManager:
   - Player 2
   - handle
   - HitBoxEditorCameras
+  - Hit
+  - Hurt
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - Water
   - UI
   - Handles
-  - 
-  - 
+  - Player 1 HitBoxes
+  - Player 2 HitBoxes
   - 
   - 
   - 

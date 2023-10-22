@@ -8,6 +8,7 @@ public class CharacterController : MonoBehaviour
 
     [Header("Specialized Character Data:")]
     [SerializeField] public CharacterDataSO characterData;
+    private CharacterDataSO enemyData; //used only to get hit reachtion animations from the enemy's move list
 
     [Header("Controller Modules:")]
     [SerializeField] public InputManager inputManager;
@@ -39,6 +40,8 @@ public class CharacterController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         InitializeCharacterSettings();
+
+        GetEnemyData();
 
         InitializeCharacterData();
 
@@ -80,6 +83,21 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void GetEnemyData()
+    {
+        string tag;
+
+        if (isPlayer1)
+            tag = "Player 2";
+        else
+            tag = "Player 1";
+
+        if (GameObject.FindGameObjectWithTag(tag) != null)
+            enemyData = GameObject.FindGameObjectWithTag(tag).GetComponent<CharacterController>().characterData;
+        else
+            enemyData = null;
+    }
+
     public void InitializeCharacterSettings()
     {
         if (CompareTag("Player 1"))
@@ -105,7 +123,7 @@ public class CharacterController : MonoBehaviour
 
             comboTree = new ComboTree(characterData.moveList);
 
-            animationManager = new AnimationManager(anim, hitBoxAnim, characterData);
+            animationManager = new AnimationManager(anim, hitBoxAnim, characterData, enemyData);
 
             movementManager = new MovementManager(this, characterData);
 
