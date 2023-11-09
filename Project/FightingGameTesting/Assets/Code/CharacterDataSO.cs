@@ -32,3 +32,4 @@ public class Move
     public FightAnimationPlayableAsset hitAnim;
     public List<SequenceBlock> inputSequence;
 }
+

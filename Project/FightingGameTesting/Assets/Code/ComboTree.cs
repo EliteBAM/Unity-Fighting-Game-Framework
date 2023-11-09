@@ -70,6 +70,7 @@ public class ComboTree
                         current.containsMove = true;
                         current.moveAnim = currentMove.moveAnim.clip;
                         current.moveName = currentMove.moveName;
+                        current.hitAnim = currentMove.hitAnim.clip;
                     }
                 }
             }
@@ -113,6 +114,7 @@ public class Node
     //Move Data (initialized if final block of combo, else null)
     public string moveName = null;
     public AnimationClip moveAnim = null;
+    public AnimationClip hitAnim = null;
 
     public SequenceBlock sequenceBlockData; // { get; set; }
     public string associatedMove;

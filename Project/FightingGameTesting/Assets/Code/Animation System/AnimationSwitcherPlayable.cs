@@ -46,6 +46,11 @@ public class AnimationSwitcherPlayable : PlayableBehaviour
     
     }
 
+    public double GetRemainingTime()
+    {
+        return clipDuration;
+    }
+
     public void PlayAnimation(string animationName)
     {
         for(int i = 0; i < mixer.GetInputCount(); i++)
@@ -90,22 +95,21 @@ public class AnimationSwitcherPlayable : PlayableBehaviour
         //this block defaults character to idle animation when other non-looping animations are finished playing
         if (!currentClip.Playable.GetBehaviour().clipPlayable.GetAnimationClip().isLooping && clipDuration <= 0)
         {
-            //reset and pause old clip
+            //pause and set weight of old clip to zero
             mixer.SetInputWeight(currentClip.Index, 0);
-            currentClip.Playable.SetTime(0);
             currentClip.Playable.Pause();
 
             //reset and play new clip
             var fightPlayable = (ScriptPlayable<FightAnimationPlayable>)mixer.GetInput(0);
             currentClip = (fightPlayable, 0);
 
-            currentClip.Playable.SetTime(0);
+            //currentClip.Playable.SetTime(0); //this did not work
+            currentClip.Playable.GetBehaviour().ResetTime();
             mixer.SetInputWeight(0, 1);
             currentClip.Playable.Play();
 
 
             Debug.Log("animation was reset to idle");
-            return;
         }
     }
 }

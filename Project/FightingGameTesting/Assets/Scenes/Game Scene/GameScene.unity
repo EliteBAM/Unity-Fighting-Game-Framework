@@ -2079,6 +2079,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer1: 0
   characterData: {fileID: 11400000, guid: ad00af6e20cfafd4c9fb71ed27d11607, type: 2}
+  stateManager:
+    currentState:
+      stateType: 0
+      animationName: 
   inputManager:
     inputTimer: 0
     currentFrameWindow: 0
@@ -2174,6 +2178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer1: 0
   characterData: {fileID: 11400000, guid: ad00af6e20cfafd4c9fb71ed27d11607, type: 2}
+  stateManager:
+    currentState:
+      stateType: 0
+      animationName: 
   inputManager:
     inputTimer: 0
     currentFrameWindow: 0

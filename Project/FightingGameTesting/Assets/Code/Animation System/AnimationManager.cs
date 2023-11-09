@@ -68,6 +68,11 @@ public class AnimationManager
 
     }
 
+    public AnimationSwitcherPlayable GetAnimationSwitcher()
+    {
+        return animationSwitcherBehaviour;
+    }
+
     public void UpdateAnimationGraph()
     {
         if(graph.GetTimeUpdateMode() == DirectorUpdateMode.Manual)

@@ -25,14 +25,16 @@ public class InputManager
     public float currentFrameWindow;
     Dictionary<GenericControls, KeyCode> keybindReferences;
 
-    private AnimationManager animationManager;
+    //private AnimationManager animationManager;
+    private StateManager stateManager;
 
-    public InputManager(ControlSet set, ComboTree tree, AnimationManager animationManager)
+    public InputManager(ControlSet set, ComboTree tree, StateManager stateManager)
     {
         playerControls = set;
         root = tree.root;
         activeNode = root;
-        this.animationManager = animationManager;
+        //this.animationManager = animationManager;
+        this.stateManager = stateManager;
 
         keybindReferences = GetKeybindReference();
     }
@@ -137,8 +139,9 @@ public class InputManager
     {
         if (activeNode.containsMove)
         {
-            animationManager.PlayAnimation(activeNode.moveAnim.name);
-            //anim.Play(activeNode.moveAnim.name);
+            //animationManager.PlayAnimation(activeNode.moveAnim.name);
+            stateManager.AddStateToQueue(activeNode.moveAnim.name, activeNode.hitAnim.name, StateType.Combo);
+
             Debug.Log(activeNode.moveName + " was Activated!");
         }
     }
@@ -153,13 +156,13 @@ public class InputManager
         //debug
         if (inputHistory.Count > 0)
         {
-            string debug = "[ ";
+            string output = "[ ";
             foreach (SequenceBlock sequence in inputHistory)
             {
-                debug = debug + sequence.SequenceBlockDebug() + " ";
+                output = output + sequence.SequenceBlockDebug() + " ";
             }
-            debug = debug + "]";
-            Debug.Log(debug);
+            output = output + "]";
+            Debug.Log(output);
         }
     }
 

@@ -8,7 +8,10 @@ public class CharacterController : MonoBehaviour
 
     [Header("Specialized Character Data:")]
     [SerializeField] public CharacterDataSO characterData;
-    private CharacterDataSO enemyData; //used only to get hit reachtion animations from the enemy's move list
+    private CharacterDataSO enemyData; //used only to get hit reaction animations from the enemy's move list
+
+    [Header("High Level Managers")]
+    [SerializeField] public StateManager stateManager;
 
     [Header("Controller Modules:")]
     [SerializeField] public InputManager inputManager;
@@ -63,6 +66,8 @@ public class CharacterController : MonoBehaviour
         movementManager.Jump(keybinds.Jump);
 
         animationManager.UpdateAnimationGraph();
+
+        stateManager.UpdateCurrentState();
 
     }
 
@@ -127,7 +132,9 @@ public class CharacterController : MonoBehaviour
 
             movementManager = new MovementManager(this, characterData);
 
-            inputManager = new InputManager(keybinds, comboTree, animationManager);
+            stateManager = new StateManager(animationManager);
+
+            inputManager = new InputManager(keybinds, comboTree, stateManager);
 
 
             Debug.Log(characterData.characterName + " Data Initialized.");
@@ -141,88 +148,99 @@ public class CharacterController : MonoBehaviour
 
     private void UpdateBasicInputs()
     {
-        //left
-        if (Input.GetKeyDown(keybinds.Right))
-        {
-            movementManager.moveRight = true;
-            anim.applyRootMotion = false;
-            animationManager.PlayAnimation(moveRightAnim);
-        }
+        if (stateManager.currentState.stateType == StateType.Combo) //this functionality should be better implemented and better organized in the future
+            anim.applyRootMotion = true;
 
-        if (Input.GetKey(keybinds.Right))
+        if (stateManager.currentState.stateType == StateType.Idle)
         {
-            if(Input.GetKeyDown(keybinds.Left))
-            {
-                movementManager.moveRight = false;
-
-                anim.applyRootMotion = true;
-                animationManager.PlayAnimation("_idle");
-                return;
-            }
-        }
-
-        //right
-        if (Input.GetKeyDown(keybinds.Left))
-        {
-            movementManager.moveLeft = true;
-            anim.applyRootMotion = false;
-            animationManager.PlayAnimation(moveLeftAnim);
-        }
-
-        if (Input.GetKey(keybinds.Left))
-        {
+            //left
             if (Input.GetKeyDown(keybinds.Right))
-            {
-                movementManager.moveLeft = false;
-                movementManager.moveRight = false; //don't know why I need this line here, but it works fine in the opposite direction without it.
-                //I figured it out. It's because of the order of the if statements. I guess it's fine though even though the asymetry bothers me?
-
-                anim.applyRootMotion = true;
-                animationManager.PlayAnimation("_idle");
-                return;
-            }
-        }
-
-
-        //jump
-        if (Input.GetKey(keybinds.Jump))
-            movementManager.jump = true;
-
-        //unpress
-        if (Input.GetKeyUp(keybinds.Left))
-        {
-            movementManager.moveLeft = false;
-            if(!Input.GetKey(keybinds.Right))
-            {
-                anim.applyRootMotion = true;
-                animationManager.PlayAnimation("_idle");
-            }
-            else
             {
                 movementManager.moveRight = true;
                 anim.applyRootMotion = false;
                 animationManager.PlayAnimation(moveRightAnim);
             }
-        }
 
-        if (Input.GetKeyUp(keybinds.Right))
-        {
-            movementManager.moveRight = false;
-            if (!Input.GetKey(keybinds.Left))
+            if (Input.GetKey(keybinds.Right))
             {
-                anim.applyRootMotion = true;
-                animationManager.PlayAnimation("_idle");
+                if (Input.GetKeyDown(keybinds.Left))
+                {
+                    movementManager.moveRight = false;
+
+                    anim.applyRootMotion = true;
+                    animationManager.PlayAnimation("_idle");
+                    return;
+                }
             }
-            else
+
+            //right
+            if (Input.GetKeyDown(keybinds.Left))
             {
                 movementManager.moveLeft = true;
                 anim.applyRootMotion = false;
                 animationManager.PlayAnimation(moveLeftAnim);
             }
-        }
 
-        if (Input.GetKeyUp(keybinds.Jump))
-            movementManager.jump = false;
+            if (Input.GetKey(keybinds.Left))
+            {
+                if (Input.GetKeyDown(keybinds.Right))
+                {
+                    movementManager.moveLeft = false;
+                    movementManager.moveRight = false; //don't know why I need this line here, but it works fine in the opposite direction without it.
+                                                       //I figured it out. It's because of the order of the if statements. I guess it's fine though even though the asymetry bothers me?
+
+                    anim.applyRootMotion = true;
+                    animationManager.PlayAnimation("_idle");
+                    return;
+                }
+            }
+
+
+            //jump
+            if (Input.GetKey(keybinds.Jump))
+                movementManager.jump = true;
+
+            //unpress
+            if (Input.GetKeyUp(keybinds.Left))
+            {
+                movementManager.moveLeft = false;
+                if (!Input.GetKey(keybinds.Right))
+                {
+                    anim.applyRootMotion = true;
+                    animationManager.PlayAnimation("_idle");
+                }
+                else
+                {
+                    movementManager.moveRight = true;
+                    anim.applyRootMotion = false;
+                    animationManager.PlayAnimation(moveRightAnim);
+                }
+            }
+
+            if (Input.GetKeyUp(keybinds.Right))
+            {
+                movementManager.moveRight = false;
+                if (!Input.GetKey(keybinds.Left))
+                {
+                    anim.applyRootMotion = true;
+                    animationManager.PlayAnimation("_idle");
+                }
+                else
+                {
+                    movementManager.moveLeft = true;
+                    anim.applyRootMotion = false;
+                    animationManager.PlayAnimation(moveLeftAnim);
+                }
+            }
+
+            if (Input.GetKeyUp(keybinds.Jump))
+                movementManager.jump = false;
+        }
+        else
+        {
+            movementManager.moveLeft = false;
+            movementManager.moveRight = false;
+        }
     }
 
     private void FlipCharacter()

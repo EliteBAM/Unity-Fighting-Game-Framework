@@ -24,7 +24,7 @@ public class FightAnimationPlayable : PlayableBehaviour
 
         hitBoxDataPlayable = ScriptPlayable<HitBoxPlayable>.Create(graph);
         hitBoxDataBehaviour = hitBoxDataPlayable.GetBehaviour();
-        hitBoxDataBehaviour.Initialize(data);
+        hitBoxDataBehaviour.Initialize(data, clip.length);
 
         graph.Connect(clipPlayable, 0, owner, 0);
         graph.Connect(hitBoxDataPlayable, 0, owner, 1);
