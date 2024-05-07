@@ -1,5 +1,6 @@
 # Unity-Fighting-Game-Framework
 Work in Progress. 
+![fighting_game_2](https://github.com/EliteBAM/Unity-Fighting-Game-Framework/assets/43101950/52a00639-384c-465c-be0a-55fa7e9085fb)
 
 Dynamic framework for developing fighting games in Unity. 
 
