@@ -1,0 +1,653 @@
+fileFormatVersion: 2
+guid: cce70ded7a65e1547b371323f80c7d3d
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: doorburst
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Protagonist_Animations_0003:Character1_RightShoulder'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: doorburst
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 455
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Protagonist_Animations_0003:Character1_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_LeftHandMiddle1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_RightHandMiddle1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Protagonist_Animations_0003:Character1_Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: cutscene_protagonist_v9(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Protagonist_Animations_0003:Character1_Reference
+      parentName: cutscene_protagonist_v9(Clone)
+      position: {x: -0.28194433, y: 0.25077692, z: 0}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Protagonist_Animations_0003:Character1_Hips
+      parentName: Protagonist_Animations_0003:Character1_Reference
+      position: {x: -0.011951001, y: 0.7521213, z: 0.28194436}
+      rotation: {x: -0.000000028543484, y: -0.7071068, z: -0.0000000014127313, w: 0.7071068}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Protagonist_Animations_0003:Character1_LeftUpLeg
+      parentName: Protagonist_Animations_0003:Character1_Hips
+      position: {x: -0.06853459, y: -0.060473334, z: -0.011950962}
+      rotation: {x: 0.000000035132388, y: 0.000000119209275, z: -0.000000055687003, w: 1}
+      scale: {x: 0.99999976, y: 1.0000001, z: 0.9999999}
+    - name: Protagonist_Animations_0003:Character1_LeftLeg
+      parentName: Protagonist_Animations_0003:Character1_LeftUpLeg
+      position: {x: -0.04506687, y: -0.42750987, z: 0.054107394}
+      rotation: {x: -0.000000017056925, y: -1.4044787e-15, z: -0.000000019267311, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_LeftFoot
+      parentName: Protagonist_Animations_0003:Character1_LeftLeg
+      position: {x: -0.005534571, y: -0.42484206, z: -0.08180829}
+      rotation: {x: -0.00000003542437, y: -1.2108922e-16, z: -0.00000005161592, w: 1}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
+    - name: Protagonist_Animations_0003:Character1_LeftToeBase
+      parentName: Protagonist_Animations_0003:Character1_LeftFoot
+      position: {x: -0.00000009513231, y: -0.0626232, z: 0.12004664}
+      rotation: {x: 0.00000001741777, y: 1.269417e-15, z: -0.000000012618221, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Protagonist_Animations_0003:Character1_Spine
+      parentName: Protagonist_Animations_0003:Character1_Hips
+      position: {x: 0.00000001132278, y: 0.07005923, z: 0.009482624}
+      rotation: {x: 0.000000040599726, y: -0, z: -0.00000001323413, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Protagonist_Animations_0003:Character1_Spine1
+      parentName: Protagonist_Animations_0003:Character1_Spine
+      position: {x: -7.423877e-11, y: 0.14708407, z: 0.0067279832}
+      rotation: {x: -0.000000017181108, y: -1.7131131e-15, z: -0.000000036594734, w: 1}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_Spine2
+      parentName: Protagonist_Animations_0003:Character1_Spine1
+      position: {x: -0.00000006369001, y: 0.14708409, z: 0.00000004176381}
+      rotation: {x: -0.0000000046886597, y: 6.36124e-16, z: 0.000000037139454, w: 1}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000002}
+    - name: Protagonist_Animations_0003:Character1_LeftShoulder
+      parentName: Protagonist_Animations_0003:Character1_Spine2
+      position: {x: -0.07427898, y: 0.1002654, z: -0.037328318}
+      rotation: {x: -0.000000034769354, y: -0.000000119209275, z: -0.000000008046202, w: 1}
+      scale: {x: 0.9999998, y: 0.9999998, z: 1}
+    - name: Protagonist_Animations_0003:Character1_LeftArm
+      parentName: Protagonist_Animations_0003:Character1_LeftShoulder
+      position: {x: -0.1177181, y: 0.0000013955679, z: 0.00000006868757}
+      rotation: {x: -0.00000001862606, y: 0.00000005960468, z: 0.0000064894543, w: 1}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000005}
+    - name: Protagonist_Animations_0003:Character1_LeftForeArm
+      parentName: Protagonist_Animations_0003:Character1_LeftArm
+      position: {x: -0.33032793, y: 0.00928857, z: 0.0022071614}
+      rotation: {x: 0.000000029802123, y: -0.000000029798207, z: -0.00011556408, w: 1}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000008}
+    - name: Protagonist_Animations_0003:Character1_LeftHand
+      parentName: Protagonist_Animations_0003:Character1_LeftForeArm
+      position: {x: -0.30231714, y: -0.009968847, z: 0.010099314}
+      rotation: {x: 0.0020097198, y: 0.000031421812, z: 0.061170984, w: 0.9981253}
+      scale: {x: 1.000001, y: 1.0000004, z: 1.0000005}
+    - name: Protagonist_Animations_0003:Character1_LeftHandMiddle1
+      parentName: Protagonist_Animations_0003:Character1_LeftHand
+      position: {x: -0.0805781, y: 0.020630915, z: 0.007116617}
+      rotation: {x: -0.028148016, y: -0.0001808846, z: -0.3222948, w: 0.94622076}
+      scale: {x: 0.9999997, y: 0.9999997, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_LeftHandMiddle2
+      parentName: Protagonist_Animations_0003:Character1_LeftHandMiddle1
+      position: {x: -0.049067363, y: -0.029824326, z: 0.004362582}
+      rotation: {x: -0.00000070482184, y: 0.00027995865, z: 0.01231951, w: 0.9999241}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: Protagonist_Animations_0003:Character1_LeftHandThumb1
+      parentName: Protagonist_Animations_0003:Character1_LeftHand
+      position: {x: -0.0005600734, y: -0.010393463, z: 0.034227896}
+      rotation: {x: -0.16175443, y: 0.17644267, z: -0.17402881, w: 0.9552055}
+      scale: {x: 0.99999934, y: 0.9999991, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_LeftHandThumb2
+      parentName: Protagonist_Animations_0003:Character1_LeftHandThumb1
+      position: {x: -0.05073779, y: -0.02474654, z: 0.023020416}
+      rotation: {x: 0.00000004395128, y: 0.000000059249192, z: 0.01763177, w: 0.99984455}
+      scale: {x: 1, y: 1, z: 1.0000004}
+    - name: Protagonist_Animations_0003:Character1_RightShoulder
+      parentName: Protagonist_Animations_0003:Character1_Spine2
+      position: {x: 0.07427888, y: 0.100265115, z: -0.037328355}
+      rotation: {x: 0.00000001929798, y: 0.000000119209275, z: -0.000000033508822, w: 1}
+      scale: {x: 0.9999997, y: 0.9999998, z: 1}
+    - name: Protagonist_Animations_0003:Character1_RightArm
+      parentName: Protagonist_Animations_0003:Character1_RightShoulder
+      position: {x: 0.11771805, y: 0.0000015059585, z: 0.0000000062122316}
+      rotation: {x: -0.0000000335258, y: -0.00000011921009, z: -0.000020122154, w: 1}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.000001}
+    - name: Protagonist_Animations_0003:Character1_RightForeArm
+      parentName: Protagonist_Animations_0003:Character1_RightArm
+      position: {x: 0.33032775, y: 0.009297191, z: 0.0022076291}
+      rotation: {x: 0.000000017779032, y: 2.0392577e-12, z: 0.00036408188, w: 1}
+      scale: {x: 1.0000013, y: 1.0000001, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_RightHand
+      parentName: Protagonist_Animations_0003:Character1_RightForeArm
+      position: {x: 0.30231217, y: -0.010127602, z: 0.010099632}
+      rotation: {x: 0.0020276562, y: -0.000028444718, z: -0.06381534, w: 0.9979597}
+      scale: {x: 1.0000004, y: 1, z: 1.0000004}
+    - name: Protagonist_Animations_0003:Character1_RightHandThumb1
+      parentName: Protagonist_Animations_0003:Character1_RightHand
+      position: {x: 0.00060900935, y: -0.010390785, z: 0.034227956}
+      rotation: {x: -0.16572687, y: -0.17487004, z: 0.18606266, w: 0.9525417}
+      scale: {x: 1.0000005, y: 0.9999997, z: 1.000001}
+    - name: Protagonist_Animations_0003:Character1_RightHandThumb2
+      parentName: Protagonist_Animations_0003:Character1_RightHandThumb1
+      position: {x: 0.050113495, y: -0.025987936, z: 0.023020389}
+      rotation: {x: -0.000000026240013, y: -0.00000008974971, z: -0.05556756, w: 0.998455}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Protagonist_Animations_0003:Character1_RightHandMiddle1
+      parentName: Protagonist_Animations_0003:Character1_RightHand
+      position: {x: 0.08047996, y: 0.021011464, z: 0.007116599}
+      rotation: {x: -0.022745479, y: -0.016003435, z: 0.3353053, w: 0.94169897}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1}
+    - name: Protagonist_Animations_0003:Character1_RightHandMiddle2
+      parentName: Protagonist_Animations_0003:Character1_RightHandMiddle1
+      position: {x: 0.048537172, y: -0.03087361, z: 0.002665608}
+      rotation: {x: 0.0013221697, y: 0.15639539, z: -0.038652744, w: 0.9869371}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_Neck
+      parentName: Protagonist_Animations_0003:Character1_Spine2
+      position: {x: -0.00000008027695, y: 0.14708415, z: -0.03643808}
+      rotation: {x: -0.000000013135088, y: -2.5656519e-17, z: 0.000000007529109, w: 1}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_Head
+      parentName: Protagonist_Animations_0003:Character1_Neck
+      position: {x: 0.00000020999408, y: 0.11932715, z: 0.0024627622}
+      rotation: {x: 0.00000008499175, y: -0.000000119209275, z: -0.000000015058212, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: Protagonist_Animations_0003:Character1_RightUpLeg
+      parentName: Protagonist_Animations_0003:Character1_Hips
+      position: {x: 0.06853446, y: -0.060473092, z: -0.011950978}
+      rotation: {x: 0.000000041769344, y: 0.000000119209275, z: -0.00000003643161, w: 1}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: Protagonist_Animations_0003:Character1_RightLeg
+      parentName: Protagonist_Animations_0003:Character1_RightUpLeg
+      position: {x: 0.045068216, y: -0.42751056, z: 0.054100756}
+      rotation: {x: 1.893241e-11, y: -0, z: 0.000000036711633, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.99999994}
+    - name: Protagonist_Animations_0003:Character1_RightFoot
+      parentName: Protagonist_Animations_0003:Character1_RightLeg
+      position: {x: 0.0055343327, y: -0.424842, z: -0.081808574}
+      rotation: {x: -0.00000003276148, y: 1.2027741e-15, z: 0.0000000024621654, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: Protagonist_Animations_0003:Character1_RightToeBase
+      parentName: Protagonist_Animations_0003:Character1_RightFoot
+      position: {x: 0.00000010022783, y: -0.06262331, z: 0.120046526}
+      rotation: {x: 0.000000046472522, y: -0.000041931864, z: -0.0000000011424051, w: 1}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: Protagonist_Animations_0003:model
+      parentName: cutscene_protagonist_v9(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 6.987211, y: 6.987211, z: 6.987211}
+    - name: Protagonist_Animations_0003:head
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.0024501472, y: 0.2388237, z: -0.005571001}
+      rotation: {x: -0.055096034, y: 0.70495707, z: -0.055096034, w: 0.70495707}
+      scale: {x: 3.0444639, y: 3.151154, z: 3.151154}
+    - name: Protagonist_Animations_0003:neck
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.00000028017402, y: 0.22536491, z: -0.0051649385}
+      rotation: {x: 0.008534493, y: 0.7070553, z: 0.008534493, w: 0.7070553}
+      scale: {x: 1.2443744, y: 1.9003198, z: 1.2443744}
+    - name: Protagonist_Animations_0003:torso
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.004012121, y: 0.18898225, z: 0.00066516816}
+      rotation: {x: -0.0014516194, y: 0.7071053, z: -0.0014516194, w: 0.7071053}
+      scale: {x: 1.9345516, y: 4.566979, z: 4.566979}
+    - name: Protagonist_Animations_0003:waist
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.00025354195, y: 0.16949312, z: -0.0009880194}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1.573129, y: 2.0843506, z: 2.7532358}
+    - name: Protagonist_Animations_0003:pelvis
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.00020793342, y: 0.16227336, z: -0.00067048124}
+      rotation: {x: 0.030568961, y: 0.70644575, z: 0.030568961, w: 0.70644575}
+      scale: {x: 1.6965063, y: 4.005015, z: 4.005015}
+    - name: Protagonist_Animations_0003:leg_upper_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.012303774, y: 0.13308825, z: 0.00034457832}
+      rotation: {x: -0.031767543, y: 0.7063928, z: -0.031767543, w: 0.7063928}
+      scale: {x: 1.3159015, y: 1.3159015, z: 1.3159015}
+    - name: Protagonist_Animations_0003:knee_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.01624125, y: 0.07327973, z: 0.003719225}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1.0084186, y: 1.0084186, z: 1.0084186}
+    - name: Protagonist_Animations_0003:leg_lower_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.016650764, y: 0.06533383, z: 0.0052566677}
+      rotation: {x: 0.047357306, y: 0.7028578, z: 0.07740139, w: 0.7055192}
+      scale: {x: 1.1090504, y: 1.1090504, z: 1.1090504}
+    - name: Protagonist_Animations_0003:foot_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.008738732, y: 0.0068838354, z: -0.0012520867}
+      rotation: {x: 0, y: 0.6807161, z: -0, w: 0.73254734}
+      scale: {x: 1, y: 1, z: 1.0222223}
+    - name: Protagonist_Animations_0003:toes_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.015894458, y: 0.005167073, z: 0.01529239}
+      rotation: {x: 0, y: 0.6807161, z: -0, w: 0.73254734}
+      scale: {x: 0.517258, y: 0.517258, z: 1.1790098}
+    - name: Protagonist_Animations_0003:leg_upper_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.00874604, y: 0.13308825, z: -0.022432582}
+      rotation: {x: -0.031767543, y: 0.7063928, z: -0.031767543, w: 0.7063928}
+      scale: {x: 1.3159015, y: 1.3159015, z: 1.3159015}
+    - name: Protagonist_Animations_0003:knee_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.016239528, y: 0.07327973, z: -0.028763836}
+      rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1.0084186, y: 1.0084186, z: 1.0084186}
+    - name: Protagonist_Animations_0003:leg_lower_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.015044536, y: 0.0666983, z: -0.026743447}
+      rotation: {x: 0.047357306, y: 0.7028578, z: 0.07740139, w: 0.7055192}
+      scale: {x: 1.1090504, y: 1.1090504, z: 1.1090504}
+    - name: Protagonist_Animations_0003:foot_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.02257798, y: 0.0068838354, z: -0.03497511}
+      rotation: {x: 0, y: 0.6807161, z: -0, w: 0.73254734}
+      scale: {x: 1, y: 1, z: 1.0222223}
+    - name: Protagonist_Animations_0003:toes_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.01562042, y: 0.005167073, z: -0.018512638}
+      rotation: {x: 0, y: 0.6807161, z: -0, w: 0.73254734}
+      scale: {x: 0.517258, y: 0.517258, z: 1.1790098}
+    - name: Protagonist_Animations_0003:shoulder_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.027406901, y: 0.20895426, z: -0.005439961}
+      rotation: {x: 0.34018987, y: 0.6275985, z: -0.50459045, w: 0.48557124}
+      scale: {x: 1.1240625, y: 1.1240625, z: 1.1240625}
+    - name: Protagonist_Animations_0003:arm_upper_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.049946614, y: 0.21115501, z: -0.0053729285}
+      rotation: {x: 0.5014796, y: 0.4956961, z: -0.5011873, w: 0.50161225}
+      scale: {x: 1.2652502, y: 3.9659486, z: 1.2652502}
+    - name: Protagonist_Animations_0003:elbow_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.074474424, y: 0.21135943, z: -0.004767537}
+      rotation: {x: 0.5338209, y: 0.455022, z: -0.42592585, w: 0.5714695}
+      scale: {x: 0.75400025, y: 0.75400025, z: 0.75400025}
+    - name: Protagonist_Animations_0003:arm_lower_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.10484812, y: 0.2080508, z: -0.0032407818}
+      rotation: {x: 0.46954533, y: 0.5072752, z: -0.51759046, w: 0.50428087}
+      scale: {x: 1.1662282, y: 4.3127284, z: 1.1662282}
+    - name: Protagonist_Animations_0003:hand_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.12793107, y: 0.2146375, z: -0.0031613803}
+      rotation: {x: 0.46557328, y: 0.524644, z: -0.5010491, w: 0.5068925}
+      scale: {x: 1.214526, y: 1.214526, z: 0.5608448}
+    - name: Protagonist_Animations_0003:thumb_left
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.12543458, y: 0.20743097, z: 0.0033597054}
+      rotation: {x: 0.5968876, y: 0.7743064, z: 0.106869765, w: -0.18098009}
+      scale: {x: 0.38836268, y: 1.214526, z: 0.5608448}
+    - name: Protagonist_Animations_0003:shoulder_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.042935073, y: 0.15868813, z: -0.020029971}
+      rotation: {x: 0.34018987, y: 0.6275985, z: -0.50459045, w: 0.48557124}
+      scale: {x: 1.1240625, y: 1.1240625, z: 1.1240625}
+    - name: Protagonist_Animations_0003:arm_upper_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.17504723, y: 0.10975934, z: -0.0061811088}
+      rotation: {x: 0.5014796, y: 0.4956961, z: -0.5011873, w: 0.50161225}
+      scale: {x: 1.2652502, y: 3.9659486, z: 1.2652502}
+    - name: Protagonist_Animations_0003:elbow_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.029291658, y: 0.06649063, z: -0.01449779}
+      rotation: {x: 0.5338209, y: 0.455022, z: -0.42592585, w: 0.5714695}
+      scale: {x: 0.75400025, y: 0.75400025, z: 0.75400025}
+    - name: Protagonist_Animations_0003:arm_lower_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: -0.39755282, y: 0.000981903, z: 0.01681667}
+      rotation: {x: 0.46954533, y: 0.5072752, z: -0.51759046, w: 0.50428087}
+      scale: {x: 1.1662282, y: 4.3127284, z: 1.1662282}
+    - name: Protagonist_Animations_0003:hand_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.13172409, y: -0.035316084, z: -0.019852314}
+      rotation: {x: 0.46557328, y: 0.524644, z: -0.5010491, w: 0.5068925}
+      scale: {x: 1.214526, y: 1.214526, z: 0.5608448}
+    - name: Protagonist_Animations_0003:thumb_right
+      parentName: Protagonist_Animations_0003:model
+      position: {x: 0.15888943, y: 0.015814895, z: 0.05021453}
+      rotation: {x: 0.5968876, y: 0.7743064, z: 0.106869765, w: -0.18098009}
+      scale: {x: 0.38836268, y: 1.214526, z: 0.5608448}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
