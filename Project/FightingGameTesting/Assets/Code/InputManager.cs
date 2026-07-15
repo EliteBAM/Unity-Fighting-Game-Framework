@@ -26,9 +26,9 @@ public class InputManager
     Dictionary<GenericControls, KeyCode> keybindReferences;
 
     //private AnimationManager animationManager;
-    private StateManager stateManager;
+    private PlayerStateManager stateManager;
 
-    public InputManager(ControlSet set, ComboTree tree, StateManager stateManager)
+    public InputManager(ControlSet set, ComboTree tree, PlayerStateManager stateManager)
     {
         playerControls = set;
         root = tree.root;

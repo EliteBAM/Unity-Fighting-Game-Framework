@@ -8,7 +8,13 @@ public class CharacterDataSO : ScriptableObject
     [Header("Name")]
     public CharacterRoster characterName;
 
+    [Header("Character Model")]
+    public GameObject characterRig;
+    public Avatar rigAvatar;
+    public float modelScale = 1.0f;
+
     [Header("Character Stats")]
+    public int maxHealth = 1000;
     public int jumpCount = 1;
     public float acceleration = 300f;
     public float maxSpeed = 600f;

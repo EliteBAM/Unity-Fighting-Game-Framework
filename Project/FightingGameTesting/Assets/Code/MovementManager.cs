@@ -61,10 +61,10 @@ public class MovementManager
     public void UpdatePlayerMovement()
     {
 
-        if (moveLeft && !(((controller.isPlayer1 && !flippedSides) || (!controller.isPlayer1 && flippedSides)) && CameraController.playerDistance >= CameraController.maxPlayerDistance))
+        if (moveLeft && !(((controller.isPlayer1 && !flippedSides) || (!controller.isPlayer1 && flippedSides)) && CombatCameraController.playerDistance >= CombatCameraController.maxPlayerDistance))
             controller.rb.AddForce(Vector3.left * acceleration, ForceMode.Acceleration);
 
-        if (moveRight && !(((controller.isPlayer1 && flippedSides) || (!controller.isPlayer1 && !flippedSides)) && CameraController.playerDistance >= CameraController.maxPlayerDistance))
+        if (moveRight && !(((controller.isPlayer1 && flippedSides) || (!controller.isPlayer1 && !flippedSides)) && CombatCameraController.playerDistance >= CombatCameraController.maxPlayerDistance))
             controller.rb.AddForce(Vector3.right * acceleration, ForceMode.Acceleration);
 
         //cap movement speed

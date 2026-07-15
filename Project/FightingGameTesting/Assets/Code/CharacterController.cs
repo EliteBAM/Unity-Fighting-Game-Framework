@@ -1,17 +1,27 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(HitBoxAnimator))]
 public class CharacterController : MonoBehaviour
 {
     public bool isPlayer1;
 
+    [Header("Game Stats")]
+    public int health;
+    public int score;
+    public int streak;
+
+    [HideInInspector] public int maxHealth = 100;
+
     [Header("Specialized Character Data:")]
     [SerializeField] public CharacterDataSO characterData;
+    public bool useCharacterRig = true;
     private CharacterDataSO enemyData; //used only to get hit reaction animations from the enemy's move list
 
     [Header("High Level Managers")]
-    [SerializeField] public StateManager stateManager;
+    [SerializeField] public PlayerStateManager stateManager;
 
     [Header("Controller Modules:")]
     [SerializeField] public InputManager inputManager;
@@ -22,7 +32,7 @@ public class CharacterController : MonoBehaviour
 
     //GameObject Components
     [HideInInspector] public Rigidbody rb;
-    Animator anim;
+    public Animator anim;
     HitBoxAnimator hitBoxAnim;
 
     //special data structures
@@ -38,7 +48,7 @@ public class CharacterController : MonoBehaviour
     void Awake()
     {
 
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
         hitBoxAnim = GetComponentInChildren<HitBoxAnimator>();
         rb = GetComponent<Rigidbody>();
 
@@ -53,7 +63,8 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ResetPosition();
+        if (Input.GetKeyDown(KeyCode.Space))
+            ResetPosition();
 
         FlipCharacter();
 
@@ -79,13 +90,10 @@ public class CharacterController : MonoBehaviour
 
     public void ResetPosition()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isPlayer1)
-                transform.position = new Vector3(-5, 1.1f, 0);
-            else
-                transform.position = new Vector3(5, 1.1f, 0);
-        }
+        if (isPlayer1)
+            transform.position = new Vector3(-5, 1.1f, 0);
+        else
+            transform.position = new Vector3(5, 1.1f, 0);
     }
 
     public void GetEnemyData()
@@ -125,6 +133,30 @@ public class CharacterController : MonoBehaviour
     {
         if (characterData != null)
         {
+            //setting up the character model first
+            if(useCharacterRig)
+            {
+                GameObject rig = Instantiate(characterData.characterRig, transform.position, transform.rotation);
+                Destroy(rig.GetComponent<Animator>());
+                rig.transform.parent = transform; //setting model as child of player object
+                rig.transform.localScale = Vector3.one * characterData.modelScale; //setting scale of model based on data sheet
+
+                //getting the children and changing the parent
+                int childrenCount = rig.transform.childCount;
+                Transform[] children = new Transform[childrenCount];
+                for (int i = 0; i < childrenCount; i++)
+                    children[i] = rig.transform.GetChild(i);
+                foreach (Transform child in children)
+                    child.SetParent(transform);
+
+                Destroy(rig); //destroying the remaining empty GameObject
+                anim.avatar = characterData.rigAvatar; //setting the avatar based on data sheet.
+            }
+
+
+            //setting up stats
+            maxHealth = characterData.maxHealth;
+            health = maxHealth;
 
             comboTree = new ComboTree(characterData.moveList);
 
@@ -132,7 +164,7 @@ public class CharacterController : MonoBehaviour
 
             movementManager = new MovementManager(this, characterData);
 
-            stateManager = new StateManager(animationManager);
+            stateManager = new PlayerStateManager(animationManager);
 
             inputManager = new InputManager(keybinds, comboTree, stateManager);
 
@@ -245,7 +277,7 @@ public class CharacterController : MonoBehaviour
 
     private void FlipCharacter()
     {
-        if(CameraController.flipP1 || CameraController.flipP2)
+        if(CombatCameraController.flipP1 || CombatCameraController.flipP2)
         {
             var tempString = moveRightAnim;
             moveRightAnim = moveLeftAnim;
@@ -254,9 +286,9 @@ public class CharacterController : MonoBehaviour
             transform.Rotate(0, 180, 0);
 
             if (isPlayer1)
-                CameraController.flipP1 = false;
+                CombatCameraController.flipP1 = false;
             else
-                CameraController.flipP2 = false;
+                CombatCameraController.flipP2 = false;
 
             if (movementManager.moveRight)
                 animationManager.PlayAnimation(moveRightAnim);

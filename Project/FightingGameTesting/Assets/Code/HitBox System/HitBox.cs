@@ -43,8 +43,13 @@ public class HitBox : MonoBehaviour
         {
             //somehow, in here, compute the hit.
             //play animation, take damage, update all systems, etc. How do I get out of here?
+
+
             Debug.Log(LayerMask.LayerToName(gameObject.layer) + " got hit!");
             myCharacter.animationManager.PlayAnimation(collision.GetComponent<HitBox>().myCharacter.stateManager.currentState.hitAnim); //.PlayAnimation(myCharacter.)
+            myCharacter.health -= 75;
+            UIManager.instance.UpdateHealthBars();
+
 
             //need a way to get the state of the attacking player, in other words, need to know what move is currently active in order to play the appropriate reaction animation.
             //thoughts:
@@ -69,7 +74,7 @@ public class HitBox : MonoBehaviour
 
         if(type == HitBoxType.Hit)
         {
-            if (collision.gameObject.GetComponent<HitBox>().type == HitBoxType.Hit)
+            if (collision.gameObject.tag == HitBoxType.Hurt.ToString())
             {
 
             }
