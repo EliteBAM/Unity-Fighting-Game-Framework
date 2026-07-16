@@ -6,6 +6,13 @@ public class CharacterController : MonoBehaviour
 {
     public bool isPlayer1;
 
+    [Header("Game Stats")]
+    public int health;
+    public int score;
+    public int streak;
+
+    [HideInInspector] public int maxHealth = 100;
+
     [Header("Specialized Character Data:")]
     [SerializeField] public CharacterDataSO characterData;
     private CharacterDataSO enemyData; //used only to get hit reaction animations from the enemy's move list

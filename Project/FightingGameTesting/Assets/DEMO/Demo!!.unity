@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18008411, g: 0.22547245, b: 0.30679804, a: 1}
+  m_IndirectSpecularColor: {r: 0.4614566, g: 0.51216316, b: 0.5898237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23605,11 +23605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1345058709}
-  previousTarget: {fileID: 0}
-  followPosition: 1
-  followRotation: 0
-  positionFollowSpeed: 0.2
-  rotationFollowSpeed: 2
+  speed: 2
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30807,11 +30803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 993201852}
-  previousTarget: {fileID: 993201852}
-  followPosition: 1
-  followRotation: 1
-  positionFollowSpeed: 2
-  rotationFollowSpeed: 30
+  speed: 2
 --- !u!114 &1228525560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40159,7 +40151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb25305ed89b92419582fc59e0a8fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layoutPath: Assets\Scenes\Game Scene\My2by3Layout.wlt
 --- !u!1 &1644367424
 GameObject:
   m_ObjectHideFlags: 0
@@ -53532,6 +53523,7 @@ GameObject:
   - component: {fileID: 919132148476607797}
   - component: {fileID: 919132148476607796}
   - component: {fileID: 919132148476607795}
+  - component: {fileID: 919132148476607799}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player 2
@@ -53557,7 +53549,6 @@ MonoBehaviour:
   streak: 0
   maxHealth: 100
   characterData: {fileID: 11400000, guid: af50be034dd958d438cc644c922f72b8, type: 2}
-  useCharacterRig: 1
   stateManager:
     currentState:
       stateType: 0
@@ -53580,7 +53571,6 @@ MonoBehaviour:
   animationManager:
     fightAnimations: []
   rb: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!54 &919132148476607795
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53623,7 +53613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a559261774aae84c83738655678208c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBoxRepository: []
 --- !u!95 &919132148476607798
 Animator:
   serializedVersion: 3
@@ -53643,6 +53632,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132148476607799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148476607793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b420ca19812fe94192c11350eab5cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxRepository: []
 --- !u!1 &919132149247055398
 GameObject:
   m_ObjectHideFlags: 0
@@ -53657,6 +53659,7 @@ GameObject:
   - component: {fileID: 919132149247055402}
   - component: {fileID: 919132149247055400}
   - component: {fileID: 919132149247055401}
+  - component: {fileID: 919132149247055404}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player 1
@@ -53682,7 +53685,6 @@ MonoBehaviour:
   streak: 0
   maxHealth: 100
   characterData: {fileID: 11400000, guid: 0920a9e8a925a0c4faea815ea02a6e20, type: 2}
-  useCharacterRig: 1
   stateManager:
     currentState:
       stateType: 0
@@ -53705,7 +53707,6 @@ MonoBehaviour:
   animationManager:
     fightAnimations: []
   rb: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!136 &919132149247055400
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -53748,7 +53749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a559261774aae84c83738655678208c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBoxRepository: []
 --- !u!95 &919132149247055403
 Animator:
   serializedVersion: 3
@@ -53768,3 +53768,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132149247055404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149247055398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b420ca19812fe94192c11350eab5cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitBoxRepository: []

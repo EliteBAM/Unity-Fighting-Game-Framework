@@ -1,74 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-[System.Serializable]
-public class PlayerStateManager
-{
-    public Queue stateQueue;
+//[System.Serializable]
+//public class PlayerStateManager
+//{
+//    public Queue stateQueue;
 
-    public State currentState;
+//    public State currentState;
 
-    // reference to the player's animation manager to execute moves
-    private AnimationManager animationManager;
-
-
-    public PlayerStateManager(AnimationManager animationManager)
-    {
-        this.animationManager = animationManager;
-
-        stateQueue = new Queue();
-
-        currentState = new State(null, null, StateType.Idle);
-    }
-
-    public void UpdateCurrentState()
-    {
-        if ((animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 || currentState.stateType == StateType.Idle) && stateQueue.Count > 0)
-        {
-            //pop the next state off the queue and run it's animation
-            Debug.Log("It's time for a new player state!");
+//    // reference to the player's animation manager to execute moves
+//    private AnimationManager animationManager;
 
 
-            State nextState = (State) stateQueue.Dequeue();
-            animationManager.PlayAnimation(nextState.animationName);
-            currentState = nextState;
+//    public PlayerStateManager(AnimationManager animationManager)
+//    {
+//        this.animationManager = animationManager;
 
-        }
-        else if(animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 && stateQueue.Count == 0)
-        {
-            currentState = new State(null, null, StateType.Idle);
-        }
-    }
+//        stateQueue = new Queue();
 
-    public void AddStateToQueue(string animationName, string hitAnim, StateType stateType)
-    {
-        stateQueue.Enqueue(new State(animationName, hitAnim, stateType));
-    }
+//        currentState = new State(null, null, StateType.Idle);
+//    }
 
-}
-
-[System.Serializable]
-public class State
-{
-
-    public StateType stateType;
-    public string animationName;
-    public string hitAnim;
+//    public void UpdateCurrentState()
+//    {
+//        if ((animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 || currentState.stateType == StateType.Idle) && stateQueue.Count > 0)
+//        {
+//            //pop the next state off the queue and run it's animation
+//            Debug.Log("It's time for a new player state!");
 
 
-    public State(string animationName, string hitAnim, StateType stateType)
-    {
-        this.stateType = stateType;
-        this.animationName = animationName;
-        this.hitAnim = hitAnim;
-    }
-}
+//            State nextState = (State)stateQueue.Dequeue();
+//            animationManager.PlayAnimation(nextState.animationName);
+//            currentState = nextState;
 
-public enum StateType : byte
-{
-    Idle,
-    Walking,
-    Combo,
-    Special
-}
+//        }
+//        else if (animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 && stateQueue.Count == 0)
+//        {
+//            currentState = new State(null, null, StateType.Idle);
+//        }
+//    }
+
+//    public void AddStateToQueue(string animationName, string hitAnim, StateType stateType)
+//    {
+//        stateQueue.Enqueue(new State(animationName, hitAnim, stateType));
+//    }
+
+//}
+
+//[System.Serializable]
+//public class State
+//{
+
+//    public StateType stateType;
+//    public string animationName;
+//    public string hitAnim;
+
+
+//    public State(string animationName, string hitAnim, StateType stateType)
+//    {
+//        this.stateType = stateType;
+//        this.animationName = animationName;
+//        this.hitAnim = hitAnim;
+//    }
+//}
+
+//public enum StateType : byte
+//{
+//    Idle,
+//    Walking,
+//    Combo,
+//    Special
+//}
