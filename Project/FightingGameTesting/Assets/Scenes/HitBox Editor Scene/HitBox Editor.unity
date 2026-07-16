@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51761648}
   - component: {fileID: 51761647}
+  - component: {fileID: 51761649}
   m_Layer: 0
   m_Name: HitBox Editor
   m_TagString: Untagged
@@ -152,15 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163e56542c22d6e44a632e0756c1d31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 0}
-  hitBoxData: []
-  hitBoxNames: []
-  currentFrame: 0
-  frameRate: 0
-  director: {fileID: 0}
-  timeline: {fileID: 0}
-  track: {fileID: 0}
-  hitBoxes: []
 --- !u!4 &51761648
 Transform:
   m_ObjectHideFlags: 0
@@ -175,6 +167,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51761649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51761646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ab4d34beb293345a1bd6f78aba7dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  hitBoxData: []
+  hitBoxNames: []
+  currentFrame: 0
+  frameRate: 0
+  director: {fileID: 0}
+  timeline: {fileID: 0}
+  track: {fileID: 0}
+  hitBoxes: []
 --- !u!1 &299001068
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,9 +645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be44c4675049674694f09ca179a751c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1854627324}
-  rotateSpeed: 5
-  speedFalloff: 0.95
 --- !u!114 &1554779665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb25305ed89b92419582fc59e0a8fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layoutPath: Assets\Scenes\HitBox Editor Scene\HitBoxEditorLayout.wlt
 --- !u!1 &1662649577
 GameObject:
   m_ObjectHideFlags: 0
