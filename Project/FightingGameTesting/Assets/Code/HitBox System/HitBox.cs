@@ -41,13 +41,22 @@ public class HitBox : MonoBehaviour
         //thanks to collision layers hitboxes will only interact with enemy hitboxes, so no need to check for same-team collisions
         if(type == HitBoxType.Hurt && collision.gameObject.tag == HitBoxType.Hit.ToString())
         {
-            //somehow, in here, compute the hit.
-            //play animation, take damage, update all systems, etc. How do I get out of here?
-
+            //compute the hit.
+            //play animation, take damage, update all systems, etc.
+            //could this logic move somewhere cleaner? Rather than in the hitbox class
 
             Debug.Log(LayerMask.LayerToName(gameObject.layer) + " got hit!");
-            myCharacter.animationManager.PlayAnimation(collision.GetComponent<HitBox>().myCharacter.stateManager.currentState.hitAnim); //.PlayAnimation(myCharacter.)
-            myCharacter.health -= 75;
+
+            //get hitAnim ID from attacking hitbox
+            string enemyMoveHitAnim = collision.GetComponent<HitBox>().myCharacter.stateManager.currentState.hitAnim;
+
+            //clear queued moves of hit player, add Hit state to state queue, and interrupt whatever they're doing to immediately activate hit state
+            myCharacter.stateManager.ClearQueue();
+            myCharacter.stateManager.AddStateToQueue(enemyMoveHitAnim, null, StateType.Hit);
+            myCharacter.stateManager.InterruptToNextState();
+
+            //affect damage
+            myCharacter.health -= 75; //make damage not hardcoded in the future.
             UIManager.instance.UpdateHealthBars();
 
 
@@ -72,13 +81,13 @@ public class HitBox : MonoBehaviour
                 //wait
         }
 
-        if(type == HitBoxType.Hit)
-        {
-            if (collision.gameObject.tag == HitBoxType.Hurt.ToString())
-            {
+        //if(type == HitBoxType.Hit)
+        //{
+        //    if (collision.gameObject.tag == HitBoxType.Hurt.ToString())
+        //    {
 
-            }
-        }
+        //    }
+        //}
     }
 
     void DrawHitboxGizmos()

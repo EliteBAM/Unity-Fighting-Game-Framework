@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.Animations;
 
 [RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(HitBoxAnimator))]
 public class CharacterController : MonoBehaviour
@@ -180,100 +182,187 @@ public class CharacterController : MonoBehaviour
 
     private void UpdateBasicInputs()
     {
-        if (stateManager.currentState.stateType == StateType.Combo) //this functionality should be better implemented and better organized in the future
-            anim.applyRootMotion = true;
+        //this functionality should be better implemented and better organized in the future
+        //ex. this should just update inputs. probably not also update movement based on current state
+        //each fight animation should probably be responsible for its own root motion type to clean this up.
+            //maybe fight animations can contain metadata about whether root motion should be applied during its playback?
+            //then, there would be a routine in the animator to flip the setting on and off in the "play animation" function based on the data
 
-        if (stateManager.currentState.stateType == StateType.Idle)
+
+        if (stateManager.currentState.stateType == StateType.Combo || stateManager.currentState.stateType == StateType.Hit)
         {
-            //left
-            if (Input.GetKeyDown(keybinds.Right))
-            {
-                movementManager.moveRight = true;
-                anim.applyRootMotion = false;
-                animationManager.PlayAnimation(moveRightAnim);
-            }
+            anim.applyRootMotion = true;
+            movementManager.moveLeft = false;
+            movementManager.moveRight = false;
+        }
 
-            if (Input.GetKey(keybinds.Right))
+        if (stateManager.currentState.stateType == StateType.Idle || stateManager.currentState.stateType == StateType.Walking)
+        {
+            //idle if left and right are pressed
+            if (Input.GetKey(keybinds.Right) && Input.GetKey(keybinds.Left) && stateManager.currentState.stateType == StateType.Walking)
             {
-                if (Input.GetKeyDown(keybinds.Left))
-                {
-                    movementManager.moveRight = false;
+                movementManager.moveRight = false;
+                movementManager.moveLeft = false;
 
-                    anim.applyRootMotion = true;
-                    animationManager.PlayAnimation("_idle");
-                    return;
-                }
+                anim.applyRootMotion = true;
+                //animationManager.PlayAnimation("_idle");
+                stateManager.ClearQueue();
+                stateManager.AddStateToQueue("_idle", null, StateType.Idle);
+                stateManager.InterruptToNextState();
+                Debug.Log("this should only happen once");
+                return;
             }
 
             //right
-            if (Input.GetKeyDown(keybinds.Left))
+            if (Input.GetKey(keybinds.Right) && !Input.GetKey(keybinds.Left) && stateManager.currentState.stateType == StateType.Idle)
+            {
+                movementManager.moveRight = true;
+                anim.applyRootMotion = false;
+                //animationManager.PlayAnimation(moveRightAnim);
+                stateManager.ClearQueue();
+                stateManager.AddStateToQueue(moveRightAnim, null, StateType.Walking);
+                stateManager.InterruptToNextState();
+            }
+            else if(Input.GetKeyUp(keybinds.Right) && !Input.GetKey(keybinds.Left) && stateManager.currentState.stateType == StateType.Walking)
+            {
+                movementManager.moveRight = false;
+                movementManager.moveLeft = false;
+
+                anim.applyRootMotion = true;
+
+                stateManager.ClearQueue();
+                stateManager.AddStateToQueue("_idle", null, StateType.Idle);
+                stateManager.InterruptToNextState();
+            }
+
+            //left
+            if (Input.GetKey(keybinds.Left) && !Input.GetKey(keybinds.Right) && stateManager.currentState.stateType == StateType.Idle)
             {
                 movementManager.moveLeft = true;
                 anim.applyRootMotion = false;
-                animationManager.PlayAnimation(moveLeftAnim);
+                //animationManager.PlayAnimation(moveLeftAnim);
+                stateManager.ClearQueue();
+                stateManager.AddStateToQueue(moveLeftAnim, null, StateType.Walking);
+                stateManager.InterruptToNextState();
+
             }
-
-            if (Input.GetKey(keybinds.Left))
+            else if(Input.GetKeyUp(keybinds.Left) && !Input.GetKey(keybinds.Right) && stateManager.currentState.stateType == StateType.Walking)
             {
-                if (Input.GetKeyDown(keybinds.Right))
-                {
-                    movementManager.moveLeft = false;
-                    movementManager.moveRight = false; //don't know why I need this line here, but it works fine in the opposite direction without it.
-                                                       //I figured it out. It's because of the order of the if statements. I guess it's fine though even though the asymetry bothers me?
+                movementManager.moveLeft = false;
+                movementManager.moveRight = false;
 
-                    anim.applyRootMotion = true;
-                    animationManager.PlayAnimation("_idle");
-                    return;
-                }
+                anim.applyRootMotion = true;
+
+                stateManager.ClearQueue();
+                stateManager.AddStateToQueue("_idle", null, StateType.Idle);
+                stateManager.InterruptToNextState();
             }
 
 
             //jump
             if (Input.GetKey(keybinds.Jump))
                 movementManager.jump = true;
-
-            //unpress
-            if (Input.GetKeyUp(keybinds.Left))
-            {
-                movementManager.moveLeft = false;
-                if (!Input.GetKey(keybinds.Right))
-                {
-                    anim.applyRootMotion = true;
-                    animationManager.PlayAnimation("_idle");
-                }
-                else
-                {
-                    movementManager.moveRight = true;
-                    anim.applyRootMotion = false;
-                    animationManager.PlayAnimation(moveRightAnim);
-                }
-            }
-
-            if (Input.GetKeyUp(keybinds.Right))
-            {
-                movementManager.moveRight = false;
-                if (!Input.GetKey(keybinds.Left))
-                {
-                    anim.applyRootMotion = true;
-                    animationManager.PlayAnimation("_idle");
-                }
-                else
-                {
-                    movementManager.moveLeft = true;
-                    anim.applyRootMotion = false;
-                    animationManager.PlayAnimation(moveLeftAnim);
-                }
-            }
-
             if (Input.GetKeyUp(keybinds.Jump))
                 movementManager.jump = false;
         }
-        else
-        {
-            movementManager.moveLeft = false;
-            movementManager.moveRight = false;
-        }
     }
+
+    //private void UpdateBasicInputs()
+    //{
+    //    if (stateManager.currentState.stateType == StateType.Combo) //this functionality should be better implemented and better organized in the future
+    //        anim.applyRootMotion = true;
+
+    //    if (stateManager.currentState.stateType == StateType.Idle)
+    //    {
+    //        //left
+    //        if (Input.GetKeyDown(keybinds.Right))
+    //        {
+    //            movementManager.moveRight = true;
+    //            anim.applyRootMotion = false;
+    //            animationManager.PlayAnimation(moveRightAnim);
+    //        }
+
+    //        if (Input.GetKey(keybinds.Right))
+    //        {
+    //            if (Input.GetKeyDown(keybinds.Left))
+    //            {
+    //                movementManager.moveRight = false;
+
+    //                anim.applyRootMotion = true;
+    //                animationManager.PlayAnimation("_idle");
+    //                return;
+    //            }
+    //        }
+
+    //        //right
+    //        if (Input.GetKeyDown(keybinds.Left))
+    //        {
+    //            movementManager.moveLeft = true;
+    //            anim.applyRootMotion = false;
+    //            animationManager.PlayAnimation(moveLeftAnim);
+    //        }
+
+    //        if (Input.GetKey(keybinds.Left))
+    //        {
+    //            if (Input.GetKeyDown(keybinds.Right))
+    //            {
+    //                movementManager.moveLeft = false;
+    //                movementManager.moveRight = false; //don't know why I need this line here, but it works fine in the opposite direction without it.
+    //                                                   //I figured it out. It's because of the order of the if statements. I guess it's fine though even though the asymmetry bothers me?
+
+    //                anim.applyRootMotion = true;
+    //                animationManager.PlayAnimation("_idle");
+    //                return;
+    //            }
+    //        }
+
+
+    //        //jump
+    //        if (Input.GetKey(keybinds.Jump))
+    //            movementManager.jump = true;
+
+    //        //unpress
+    //        if (Input.GetKeyUp(keybinds.Left))
+    //        {
+    //            movementManager.moveLeft = false;
+    //            if (!Input.GetKey(keybinds.Right))
+    //            {
+    //                anim.applyRootMotion = true;
+    //                animationManager.PlayAnimation("_idle");
+    //            }
+    //            else
+    //            {
+    //                movementManager.moveRight = true;
+    //                anim.applyRootMotion = false;
+    //                animationManager.PlayAnimation(moveRightAnim);
+    //            }
+    //        }
+
+    //        if (Input.GetKeyUp(keybinds.Right))
+    //        {
+    //            movementManager.moveRight = false;
+    //            if (!Input.GetKey(keybinds.Left))
+    //            {
+    //                anim.applyRootMotion = true;
+    //                animationManager.PlayAnimation("_idle");
+    //            }
+    //            else
+    //            {
+    //                movementManager.moveLeft = true;
+    //                anim.applyRootMotion = false;
+    //                animationManager.PlayAnimation(moveLeftAnim);
+    //            }
+    //        }
+
+    //        if (Input.GetKeyUp(keybinds.Jump))
+    //            movementManager.jump = false;
+    //    }
+    //    else
+    //    {
+    //        movementManager.moveLeft = false;
+    //        movementManager.moveRight = false;
+    //    }
+    //}
 
     private void FlipCharacter()
     {

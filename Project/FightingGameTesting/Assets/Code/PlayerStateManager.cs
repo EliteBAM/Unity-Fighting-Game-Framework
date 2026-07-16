@@ -24,7 +24,7 @@ public class PlayerStateManager
 
     public void UpdateCurrentState()
     {
-        if ((animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 || currentState.stateType == StateType.Idle) && stateQueue.Count > 0)
+        if ((animationManager.GetAnimationSwitcher().GetRemainingTime() <= 0 || (currentState.stateType == StateType.Idle || currentState.stateType == StateType.Walking)) && stateQueue.Count > 0)
         {
             //pop the next state off the queue and run it's animation
             Debug.Log("It's time for a new player state!");
@@ -41,9 +41,21 @@ public class PlayerStateManager
         }
     }
 
+    public void InterruptToNextState()
+    {
+        State nextState = (State)stateQueue.Dequeue();
+        animationManager.PlayAnimation(nextState.animationName);
+        currentState = nextState;
+    }
+
     public void AddStateToQueue(string animationName, string hitAnim, StateType stateType)
     {
         stateQueue.Enqueue(new State(animationName, hitAnim, stateType));
+    }
+
+    public void ClearQueue()
+    {
+        stateQueue.Clear();
     }
 
 }
@@ -70,5 +82,6 @@ public enum StateType : byte
     Idle,
     Walking,
     Combo,
-    Special
+    Special,
+    Hit
 }
